@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyRestaurant</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_price">Price</string>
+    <string name="item_description">Descriptions</string>
+    <string name="item_add">Add</string>
 </resources>
