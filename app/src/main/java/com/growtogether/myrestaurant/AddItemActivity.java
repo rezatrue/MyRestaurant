@@ -23,6 +23,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/*
+* Design & Developed by Ali Reza (rezatrue)
+* */
+
+
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener{
 
     EditText item_name, item_price, item_description;
@@ -78,7 +83,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
+            galleryAddPic();
             setPic();
 //            Bundle extras = data.getExtras();
 //            Bitmap imageBitmap = (Bitmap) extras.get("data");
