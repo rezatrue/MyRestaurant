@@ -25,14 +25,16 @@ import java.util.Date;
 
 /*
 * Design & Developed by Ali Reza (rezatrue)
-* */
+*/
 
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener{
 
     EditText item_name, item_price, item_description;
-    Button btn_add;
+    Button btn_add, btn_viewlist;
     ImageView mImageView;
+
+    private ItemDatabaseOperation itemDatabaseOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         item_price = findViewById(R.id.et_food_price);
         item_description = findViewById(R.id.et_food_description);
         btn_add = findViewById(R.id.btn_add);
+        btn_viewlist = findViewById(R.id.btn_viewlist);
         mImageView = findViewById(R.id.imageView);
+
+        itemDatabaseOperation = new ItemDatabaseOperation(this);
 
         btn_add.setOnClickListener(this);
         item_description.setOnFocusChangeListener(this);
@@ -56,15 +61,36 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         switch(id){
             case R.id.btn_add:
+                addItem();
                 Log.i("data", item_name.getText().toString());
                 Log.i("data", item_price.getText().toString());
                 Log.i("data", item_description.getText().toString());
+                break;
+
+            case R.id.btn_viewlist:
                 break;
 
             case R.id.imageView:
                 dispatchTakePictureIntent();
                 Toast.makeText(getApplicationContext(), "Image icon clicked" , Toast.LENGTH_LONG).show();
                 break;
+        }
+
+    }
+
+    public void addItem(){
+        String image = mCurrentPhotoPath;
+        String name = item_name.getText().toString();
+        String pricetxt = item_price.getText().toString();
+        double price = Double.parseDouble(pricetxt);
+        String description = item_description.getText().toString();
+        if(name.length() > 0 && pricetxt.length() > 0) {
+            Item item = new Item(image, name, description, price);
+            itemDatabaseOperation.addItem(item);
+
+            item_name.setText("");
+            item_price.setText("");
+            item_description.setText("");
         }
 
     }

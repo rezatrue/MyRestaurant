@@ -4,4 +4,5 @@
     <string name="item_price">Price</string>
     <string name="item_description">Descriptions</string>
     <string name="item_add">Add</string>
+    <string name="item_viewlist">View</string>
 </resources>
