@@ -1,7 +1,7 @@
 package com.growtogether.myrestaurant;
 
 /*
- * Design & Developed by Ali Reza (rezatrue)
+ * Design & Developed by Ali Reza (Iron Man)
  */
 
 public class Item {

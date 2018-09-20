@@ -51,6 +51,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         itemDatabaseOperation = new ItemDatabaseOperation(this);
 
         btn_add.setOnClickListener(this);
+        btn_viewlist.setOnClickListener(this);
         item_description.setOnFocusChangeListener(this);
         mImageView.setOnClickListener(this);
     }
@@ -68,6 +69,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.btn_viewlist:
+                Log.i("data", "new activity button pressed".toString());
+                startActivity(new Intent(AddItemActivity.this,ItemListActivity.class));
                 break;
 
             case R.id.imageView:

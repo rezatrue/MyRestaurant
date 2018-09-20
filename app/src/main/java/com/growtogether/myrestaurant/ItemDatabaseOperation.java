@@ -1,7 +1,7 @@
 package com.growtogether.myrestaurant;
 
 /*
- * Design & Developed by Ali Reza (rezatrue)
+ * Design & Developed by Ali Reza (Iron Man)
  */
 
 import android.content.ContentValues;
@@ -51,13 +51,14 @@ public class ItemDatabaseOperation {
         cursor.moveToFirst();
         if (cursor != null && cursor.getCount() > 0){
             for(int i = 0 ; i < cursor.getCount() ; i++){
-                int slno = cursor.getInt(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_SERIAL_NO));
+                //int slno = cursor.getInt(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_SERIAL_NO));
                 String image = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_IMAGE));
                 String name = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_NAME));
                 double price = cursor.getDouble(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_PRICE));
                 String description = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_DESCRIPTION));
                 int status = cursor.getInt(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_STATUS));
-                Item item = new Item(slno,image,name,description,price,status);
+                //Item item = new Item(slno,image,name,description,price,status);
+                Item item = new Item(image,name,description,price);
                 items.add(item);
                 cursor.moveToNext();
             }
