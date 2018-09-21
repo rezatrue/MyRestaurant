@@ -49,7 +49,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         mImageView = findViewById(R.id.imageView);
 
         itemDatabaseOperation = new ItemDatabaseOperation(this);
-
         btn_add.setOnClickListener(this);
         btn_viewlist.setOnClickListener(this);
         item_description.setOnFocusChangeListener(this);
@@ -83,16 +82,25 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addItem(){
         String image = mCurrentPhotoPath;
+        //Base64CODEC codec  = new Base64CODEC();
+        //Bitmap bitmap = codec.Base64ImageFromURL(image);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath,bmOptions);
 
-        Base64CODEC codec  = new Base64CODEC();
-        Bitmap bitmap = codec.Base64ImageFromURL(image);
+
         String name = item_name.getText().toString();
         String pricetxt = item_price.getText().toString();
+
         double price = Double.parseDouble(pricetxt);
+
         String description = item_description.getText().toString();
+
         if(name.length() > 0 && pricetxt.length() > 0) {
             Item item = new Item(bitmap, name, description, price);
+            Log.i("data" , "item created ");
+
             itemDatabaseOperation.addItem(item);
+            Log.i("data" , "item inserted inti db ");
 
             item_name.setText("");
             item_price.setText("");
@@ -197,5 +205,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         mImageView.setImageBitmap(bitmap);
     }
-
+    /*
+    File sd = Environment.getExternalStorageDirectory();
+    File image = new File(sd+filePath, imageName);
+    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+    Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+    bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
+    imageView.setImageBitmap(bitmap);
+    */
 }
