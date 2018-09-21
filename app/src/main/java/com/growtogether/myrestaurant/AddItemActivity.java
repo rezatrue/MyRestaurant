@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
-* Design & Developed by Ali Reza (rezatrue)
+* Design & Developed by Ali Reza (Iron Man)
 */
 
 
@@ -83,12 +83,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addItem(){
         String image = mCurrentPhotoPath;
+
+        Base64CODEC codec  = new Base64CODEC();
+        Bitmap bitmap = codec.Base64ImageFromURL(image);
         String name = item_name.getText().toString();
         String pricetxt = item_price.getText().toString();
         double price = Double.parseDouble(pricetxt);
         String description = item_description.getText().toString();
         if(name.length() > 0 && pricetxt.length() > 0) {
-            Item item = new Item(image, name, description, price);
+            Item item = new Item(bitmap, name, description, price);
             itemDatabaseOperation.addItem(item);
 
             item_name.setText("");

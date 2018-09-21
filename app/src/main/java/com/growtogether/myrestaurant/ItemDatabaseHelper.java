@@ -1,4 +1,7 @@
 package com.growtogether.myrestaurant;
+/*
+ * Design & Developed by Ali Reza (Iron Man)
+ */
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +12,6 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String ITEM_TABLE = "tbl_item";
-    public static final String TABLE_COL_SERIAL_NO = "tbl_serial";
     public static final String TABLE_COL_ITEM_NAME = "tbl_item_name";
     public static final String TABLE_COL_ITEM_IMAGE = "tbl_item_image";
     public static final String TABLE_COL_ITEM_DESCRIPTION = "tbl_item_description";
@@ -18,11 +20,10 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
 
 
     public static final String CREATE_TABLE_ITEM = "CREATE TABLE " + ITEM_TABLE + "( " +
-            TABLE_COL_SERIAL_NO +  "INTEGER PRIMARY KEY, " +
-            TABLE_COL_ITEM_NAME + " TEXT, " +
-            TABLE_COL_ITEM_IMAGE + " TEXT, " +
+            TABLE_COL_ITEM_NAME + " TEXT NOT NULL, " +
+            TABLE_COL_ITEM_IMAGE + " BLOB, " +
             TABLE_COL_ITEM_DESCRIPTION + " TEXT, " +
-            TABLE_COL_ITEM_PRICE + " TEXT, " +
+            TABLE_COL_ITEM_PRICE + " TEXT NOT NULL, " +
             TABLE_COL_ITEM_STATUS + " INTEGER);" ;
 
 

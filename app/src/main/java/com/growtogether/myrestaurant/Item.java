@@ -4,6 +4,8 @@ package com.growtogether.myrestaurant;
  * Design & Developed by Ali Reza (Iron Man)
  */
 
+import android.graphics.Bitmap;
+
 public class Item {
 
     private int itemSerialNo;
@@ -12,22 +14,33 @@ public class Item {
     private String itemDescription;
     private double itemPrice;
     private int itemStatus;
+    Base64CODEC codec;
+
 
     public Item(){
-
+        codec = new Base64CODEC();
     }
 
-    public Item(int itemSerialNo, String itemImage, String itemName, String itemDescription, double itemPrice, int itemStatus) {
-        this.itemSerialNo = itemSerialNo;
-        this.itemImage = itemImage;
+/*
+    public Item(String image, String itemName, String itemDescription, double itemPrice) {
+        new Item();
+        this.itemImage = image;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
-        this.itemStatus = itemStatus;
+    }
+*/
+    public Item(Bitmap bitmap, String itemName, String itemDescription, double itemPrice) {
+        new Item();
+        setItemImage(bitmap);
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
     }
 
-    public Item(String itemImage, String itemName, String itemDescription, double itemPrice) {
-        this.itemImage = itemImage;
+    public Item(byte[] image, String itemName, String itemDescription, double itemPrice) {
+        new Item();
+        setItemImage(image);
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
@@ -41,12 +54,29 @@ public class Item {
         this.itemSerialNo = itemSerialNo;
     }
 
+
     public String getItemImage() {
         return itemImage;
     }
 
-    public void setItemImage(String itemImage) {
-        this.itemImage = itemImage;
+    public Bitmap getItemBitmapImage() {
+        return codec.convertToBitmap(itemImage);
+    }
+
+    public byte[] getItemByteImage() {
+        return codec.convertToByte(itemImage);
+    }
+
+    public void setItemImage(Bitmap bitmap) {
+        this.itemImage = codec.convertToBase64(bitmap);
+    }
+
+    public void setItemImage(byte[] image) {
+        this.itemImage = codec.convertByteToBase64(image);
+    }
+
+    public void setItemImage(String image) {
+        this.itemImage = image;
     }
 
     public String getItemName() {

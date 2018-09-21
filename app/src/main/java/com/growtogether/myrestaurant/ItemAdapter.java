@@ -50,10 +50,16 @@ class ViewHolder{
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
+//        try {
+//            viewHolder.itemImageview.setImageBitmap(items.get(position).getItemBitmapImage());
+//        }catch(Exception e ){
+//            e.getMessage();
+//        }
 
         viewHolder.itemName.setText(items.get(position).getItemName());
         viewHolder.itemPrice.setText(items.get(position).getItemPrice()+"");
         viewHolder.itemDescription.setText(items.get(position).getItemDescription());
+
 
         return convertView;
     }
