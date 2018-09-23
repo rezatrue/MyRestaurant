@@ -53,9 +53,6 @@ public class ItemDatabaseOperation {
             for(int i = 0 ; i < cursor.getCount() ; i++){
 
                 byte[] byteImage =  cursor.getBlob(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_IMAGE));
-                //byte[] byteImage = null;
-                //String image =  cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_IMAGE));
-
                 String name = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_NAME));
                 double price = cursor.getDouble(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_PRICE));
                 String description = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_DESCRIPTION));

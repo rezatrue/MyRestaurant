@@ -9,18 +9,32 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 
 public class Item {
 
     private int itemSerialNo;
+    private String itemImageUrl;
     private byte[] itemImage;
     private String itemName;
+    private int itemCatId;
     private String itemDescription;
     private double itemPrice;
+    private String itemCreated;
     private int itemStatus;
 
 
     public Item(){
+    }
+
+    public Item(int itemSerialNo, String itemImageUrl,String itemName, int itemCatId, String itemDescription, double itemPrice, String itemCreated) {
+        this.itemSerialNo = itemSerialNo;
+        this.itemImageUrl = itemImageUrl;
+        this.itemName = itemName;
+        this.itemCatId = itemCatId;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemCreated = itemCreated;
     }
 
 

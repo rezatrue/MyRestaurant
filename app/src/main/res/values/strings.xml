@@ -5,4 +5,10 @@
     <string name="item_description">Descriptions</string>
     <string name="item_add">Add</string>
     <string name="item_viewlist">View</string>
+
+    <string name="user_name">Name</string>
+    <string name="user_phone">Phone No</string>
+    <string name="user_email">Email Address</string>
+    <string name="user_address">Address</string>
+    <string name="user_regis">Submit</string>
 </resources>

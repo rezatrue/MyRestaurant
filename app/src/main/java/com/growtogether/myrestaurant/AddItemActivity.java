@@ -41,12 +41,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        item_name = findViewById(R.id.et_food_item);
-        item_price = findViewById(R.id.et_food_price);
-        item_description = findViewById(R.id.et_food_description);
+        item_name = findViewById(R.id.et_user_name);
+        item_price = findViewById(R.id.et_user_phone);
+        item_description = findViewById(R.id.et_user_address);
         btn_add = findViewById(R.id.btn_add);
         btn_viewlist = findViewById(R.id.btn_viewlist);
-        mImageView = findViewById(R.id.imageView);
+        mImageView = findViewById(R.id.iv_user_image);
 
         itemDatabaseOperation = new ItemDatabaseOperation(this);
         btn_add.setOnClickListener(this);
@@ -72,7 +72,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(AddItemActivity.this,ItemListActivity.class));
                 break;
 
-            case R.id.imageView:
+            case R.id.iv_user_image:
                 dispatchTakePictureIntent();
                 Toast.makeText(getApplicationContext(), "Image icon clicked" , Toast.LENGTH_LONG).show();
                 break;
@@ -97,10 +97,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
 
         if(name.length() > 0 && pricetxt.length() > 0) {
             Item item = new Item(bitmap, name, description, price);
-            Log.i("data" , "item created ");
-
             itemDatabaseOperation.addItem(item);
-            Log.i("data" , "item inserted inti db ");
 
             item_name.setText("");
             item_price.setText("");

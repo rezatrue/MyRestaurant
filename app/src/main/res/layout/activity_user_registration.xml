@@ -5,13 +5,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemActivity">
-
+    tools:context=".UserRegistrationActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         >
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="105dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/user_email"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_user_email"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/et_user_email"
+            android:layout_width="231dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:inputType="text|textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_email"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_address" />
 
         <EditText
             android:id="@+id/et_user_phone"
@@ -23,7 +47,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:inputType="numberDecimal"
+            android:inputType="phone"
             app:layout_constraintEnd_toEndOf="@+id/et_user_address"
             app:layout_constraintStart_toStartOf="@+id/et_user_address"
             app:layout_constraintTop_toBottomOf="@+id/et_user_name" />
@@ -31,16 +55,16 @@
         <EditText
             android:id="@+id/et_user_address"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:inputType="textMultiLine|textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_address"
+            android:inputType="text|textMultiLine|textPostalAddress"
+            app:layout_constraintEnd_toEndOf="@+id/et_user_email"
+            app:layout_constraintStart_toStartOf="@+id/et_user_email"
             app:layout_constraintTop_toBottomOf="@+id/et_user_phone" />
 
         <ImageView
@@ -59,12 +83,12 @@
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <TextView
-            android:id="@+id/tv_item_name"
-            android:layout_width="84dp"
-            android:layout_height="28dp"
+            android:id="@+id/tv_name"
+            android:layout_width="74dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/item_name"
+            android:text="@string/user_name"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_user_name"
             app:layout_constraintStart_toStartOf="@+id/tv_phone" />
 
@@ -74,7 +98,7 @@
             android:layout_height="24dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/item_price"
+            android:text="@string/user_phone"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_user_phone"
             app:layout_constraintStart_toStartOf="@+id/tv_address" />
 
@@ -84,7 +108,7 @@
             android:layout_height="24dp"
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
-            android:text="@string/item_description"
+            android:text="@string/user_address"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_user_address"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -104,32 +128,18 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/item_add"
+            android:layout_marginTop="44dp"
+            android:text="@string/user_regis"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_address" />
-
-        <Button
-            android:id="@+id/btn_viewlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/item_viewlist"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_address" />
+            app:layout_constraintTop_toBottomOf="@+id/et_user_email" />
 
 
     </android.support.constraint.ConstraintLayout>
