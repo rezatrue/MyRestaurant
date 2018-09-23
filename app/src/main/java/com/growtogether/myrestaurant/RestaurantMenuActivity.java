@@ -1,9 +1,10 @@
 package com.growtogether.myrestaurant;
 /*
- * Design & Developed by Ali Reza (Iron Man)
+ * Design & Developed by Ali Ahmed Reza (Iron Man)
  */
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     private ArrayList<Item> items;
     private ItemDatabaseOperation itemDatabaseOperation;
 
-    private static final String BASE_URL = "http://10.0.0.2/api/product/";
+    private static final String BASE_URL = "http://192.168.0.104/api/product/";
     private String urlString;
     private MenuServiceApi menuServiceApi;
 
@@ -41,14 +42,13 @@ public class RestaurantMenuActivity extends AppCompatActivity {
 
         items = new ArrayList<>();
         itemListView = findViewById(R.id.item_list_view);
-        //itemDatabaseOperation = new ItemDatabaseOperation(this);
-        //items = itemDatabaseOperation.getAllItems();
-
 
         Call<MenuResponse> menuResponseCall = menuServiceApi.getMenuResponse(urlString);
         menuResponseCall.enqueue(new Callback<MenuResponse>() {
             @Override
             public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
+                Toast.makeText(RestaurantMenuActivity.this, response.code() + " < - code ", Toast.LENGTH_LONG).show();
+
                 if(response.code() == 200){
                     MenuResponse menuResponse = response.body();
                     List<MenuResponse.Item> menuItems = menuResponse.getItems();
@@ -56,21 +56,24 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                     Iterator<MenuResponse.Item> it = menuItems.iterator();
                     while(it.hasNext()){
                         MenuResponse.Item item = it.next();
+                        Log.e("data",item.getName()+" <- Name ->");
+
                         Item item1 = new Item(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
                         items.add(item1);
                     }
+
+                    itemAdapter = new ItemAdapter(getApplicationContext(),items);
+                    itemListView.setAdapter(itemAdapter);
 
                 }
             }
 
             @Override
             public void onFailure(Call<MenuResponse> call, Throwable t) {
-                Toast.makeText(RestaurantMenuActivity.this, "Api call failed.", Toast.LENGTH_LONG).show();
+                Log.e("data",t.getMessage());
+                Toast.makeText(RestaurantMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        itemAdapter = new ItemAdapter(this,items);
-        itemListView.setAdapter(itemAdapter);
 
     }
 

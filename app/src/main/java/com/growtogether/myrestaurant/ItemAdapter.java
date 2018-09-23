@@ -1,8 +1,11 @@
 package com.growtogether.myrestaurant;
-
+/*
+ * Design & Developed by Ali Ahmed Reza (Iron Man)
+ */
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -31,7 +36,6 @@ class ViewHolder{
     Button btn;
 }
 
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -51,6 +55,12 @@ class ViewHolder{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        String baseUrl = "http://192.168.0.104/api/";
+        String urltxt = baseUrl + items.get(position).getItemImageUrl();
+
+        Picasso.get().load(urltxt).into(viewHolder.itemImageview);
+
+        // this section needed for add list
         try {
             viewHolder.itemImageview.setImageBitmap(items.get(position).getItemBitmapImage());
         }catch(Exception e ){

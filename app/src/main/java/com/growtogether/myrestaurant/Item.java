@@ -52,6 +52,22 @@ public class Item {
         this.itemPrice = itemPrice;
     }
 
+    public String getItemImageUrl() {
+        return itemImageUrl;
+    }
+
+    public int getItemCatId() {
+        return itemCatId;
+    }
+
+    public String getItemCreated() {
+        return itemCreated;
+    }
+
+    public int getItemStatus() {
+        return itemStatus;
+    }
+
     public int getItemSerialNo() {
         return itemSerialNo;
     }
