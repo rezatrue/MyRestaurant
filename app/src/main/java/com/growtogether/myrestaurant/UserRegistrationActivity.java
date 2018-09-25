@@ -7,11 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class UserRegistrationActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText userName, userEmial, userPhone, userAddress;
     ImageView userImage;
     Button btnSubmit;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,13 @@ public class Item {
     private String itemCreated;
     private int itemStatus;
 
+    public void setItemCatId(int itemCatId) {
+        this.itemCatId = itemCatId;
+    }
+
+    public void setItemImageUrl(String itemImageUrl) {
+        this.itemImageUrl = itemImageUrl;
+    }
 
     public Item(){
     }

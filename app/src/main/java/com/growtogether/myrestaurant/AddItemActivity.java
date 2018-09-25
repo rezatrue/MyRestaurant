@@ -23,6 +23,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 /*
 * Design & Developed by Ali Reza (Iron Man)
 */
@@ -34,12 +40,18 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     Button btn_add, btn_viewlist;
     ImageView mImageView;
 
+    private static final String BASE_URL = "http://192.168.0.157/api/product/";
+    private MenuServiceApi menuServiceApi;
+
     private ItemDatabaseOperation itemDatabaseOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        menuServiceApi = retrofit.create(MenuServiceApi.class);
 
         item_name = findViewById(R.id.et_user_name);
         item_price = findViewById(R.id.et_user_phone);
@@ -61,7 +73,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         switch(id){
             case R.id.btn_add:
-                addItem();
+                //addItem();
+                addItemToDB();
                 Log.i("data", item_name.getText().toString());
                 Log.i("data", item_price.getText().toString());
                 Log.i("data", item_description.getText().toString());
@@ -77,6 +90,32 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(getApplicationContext(), "Image icon clicked" , Toast.LENGTH_LONG).show();
                 break;
         }
+
+    }
+
+    public void addItemToDB(){
+
+        SendItem sendItem = new SendItem();
+        sendItem.setName(item_name.getText().toString());
+        sendItem.setPrice(item_price.getText().toString());
+        sendItem.setDescription(item_description.getText().toString());
+        sendItem.setCategory("2");
+        sendItem.setImageurl("image/6.jpg");
+
+        Call<MenuResponse> menuResponseCall = menuServiceApi.createItem(sendItem);
+
+        menuResponseCall.enqueue(new Callback<MenuResponse>() {
+            @Override
+            public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
+                Log.e("data",response.code()+" <- response code ->");
+            }
+
+            @Override
+            public void onFailure(Call<MenuResponse> call, Throwable t) {
+                Log.e("data",t.getMessage()+" <- Error ->");
+            }
+        });
+
 
     }
 
