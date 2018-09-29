@@ -9,9 +9,9 @@ public class SendItem {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("imageurl")
+    @SerializedName("base64encodedImage")
     @Expose
-    private String imageurl;
+    private String imagebase64encode;
     @SerializedName("price")
     @Expose
     private String price;
@@ -23,15 +23,15 @@ public class SendItem {
     private String category;
 
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImagebase64encode() {
+        return imagebase64encode;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImagebase64encode(String imagebase64encode) {
+        this.imagebase64encode = imagebase64encode;
     }
 
-    public String getName() {
+     public String getName() {
         return name;
     }
 

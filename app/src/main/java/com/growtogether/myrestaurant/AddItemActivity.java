@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     Button btn_add, btn_viewlist;
     ImageView mImageView;
 
-    private static final String BASE_URL = "http://192.168.0.157/api/product/";
+    //private static final String BASE_URL = "http://192.168.0.157/api/product/";
+    private static final String BASE_URL = "http://192.168.0.103/api/product/";
+
     private MenuServiceApi menuServiceApi;
 
     private ItemDatabaseOperation itemDatabaseOperation;
@@ -100,7 +104,22 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         sendItem.setPrice(item_price.getText().toString());
         sendItem.setDescription(item_description.getText().toString());
         sendItem.setCategory("2");
-        sendItem.setImageurl("image/6.jpg");
+        //mImageView.
+        //sendItem.setImageurl("image/6.jpg");
+
+        Log.e("data",mCurrentPhotoPath +" <- request code ->");
+
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath,bmOptions);
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,os);
+        byte[] byteArray = os.toByteArray();
+
+        String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        Log.e("data", encodedImage.length() +" <- request base64 length code ->");
+
+        sendItem.setImagebase64encode(encodedImage);
+
 
         Call<MenuResponse> menuResponseCall = menuServiceApi.createItem(sendItem);
 
