@@ -43,7 +43,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     ImageView mImageView;
 
     //private static final String BASE_URL = "http://192.168.0.157/api/product/";
-    private static final String BASE_URL = "http://192.168.0.103/api/product/";
+    private static final String BASE_URL = "http://192.168.0.104/api/product/";
+    //private static final String BASE_URL = "http://192.168.40.215/api/product/";
 
     private MenuServiceApi menuServiceApi;
 
@@ -70,7 +71,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         item_description.setOnFocusChangeListener(this);
         mImageView.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -119,7 +119,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         Log.e("data", encodedImage.length() +" <- request base64 length code ->");
 
         sendItem.setImagebase64encode(encodedImage);
-
 
         Call<MenuResponse> menuResponseCall = menuServiceApi.createItem(sendItem);
 

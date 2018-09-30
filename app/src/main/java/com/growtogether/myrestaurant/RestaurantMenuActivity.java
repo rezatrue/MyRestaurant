@@ -26,7 +26,8 @@ public class RestaurantMenuActivity extends AppCompatActivity {
     private ArrayList<Item> items;
     private ItemDatabaseOperation itemDatabaseOperation;
 
-    private static final String BASE_URL = "http://192.168.0.103/api/product/";
+    //private static final String BASE_URL = "http://192.168.40.215/api/product/";
+    private static final String BASE_URL = "http://192.168.0.104/api/product/";
     //private static final String BASE_URL = "http://192.168.0.157/api/product/";
     //private static final String BASE_URL = "http://10.100.100.221/api/product/";
     private String urlString;

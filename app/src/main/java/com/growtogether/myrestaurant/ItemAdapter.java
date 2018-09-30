@@ -55,7 +55,7 @@ class ViewHolder{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        String baseUrl = "http://192.168.0.157/api/";
+        String baseUrl = "http://192.168.0.104/api/";
         String urltxt = baseUrl + items.get(position).getItemImageUrl();
         Log.e("data", urltxt + " <- URL ->");
         Picasso.get().load(urltxt).into(viewHolder.itemImageview);
