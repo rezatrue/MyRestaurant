@@ -27,8 +27,9 @@ public class ItemListActivity extends AppCompatActivity {
     private ItemDatabaseOperation itemDatabaseOperation;
 
     // URL for gettting data from api (api base url)
-    private static final String BASE_URL = "http://192.168.0.104/api/product/";
-    //private static final String BASE_URL = "http://192.168.0.157/api/product/";
+    //private static final String BASE_URL = "http://192.168.0.104/api/product/";
+    //private static final String BASE_URL = "http://192.168.40.215/api/product/";
+    private static final String BASE_URL = "http://192.168.0.157/api/product/";
     private String urlString;
     private MenuServiceApi menuServiceApi;
 

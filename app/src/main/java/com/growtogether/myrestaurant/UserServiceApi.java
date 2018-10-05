@@ -4,16 +4,16 @@ package com.growtogether.myrestaurant;
  */
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
-public interface MenuServiceApi {
-    @GET()
-    Call<MenuResponse> getMenuResponse(@Url String stringUrl);
+public interface UserServiceApi {
 
-    @POST("create.php")
-    Call<MenuResponse> createItem (@Body SendItem sendItem);
+    @GET("login.php")
+    Call<User> getLoginResponse(@Query("email") String uemail, @Query("password") String upassword);
 
 
 
