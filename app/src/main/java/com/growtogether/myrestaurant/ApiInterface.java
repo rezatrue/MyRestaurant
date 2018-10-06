@@ -10,10 +10,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
-public interface UserServiceApi {
+public interface ApiInterface {
 
-    @GET("login.php")
-    Call<User> getLoginResponse(@Query("email") String uemail, @Query("password") String upassword);
+    @POST("user/register.php")
+    Call<UserResponse> getRegisterResponse(@Body User user);
+
+    @GET("user/login.php")
+    Call<UserResponse> getLoginResponse(@Query("user_email") String useremail, @Query("user_password") String userpassword);
 
 
 
