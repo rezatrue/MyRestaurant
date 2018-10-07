@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new LoginFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-
     }
 
 

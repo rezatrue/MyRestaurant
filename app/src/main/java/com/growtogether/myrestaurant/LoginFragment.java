@@ -107,7 +107,11 @@ public class LoginFragment extends Fragment {
                 UserResponse userResponse = response.body();
                 Log.i(TAG, userResponse.getResponse());
                 Log.i(TAG, userResponse.getName());
-                //loginFromActivityListener.performLogin("Hello");
+                if(userResponse.getResponse().equals("ok")){
+                    userEmailET.setText(""); passwordET.setText("");
+                    String name = userResponse.getName();
+                    Toast.makeText(getContext(), " welcome " + name , Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

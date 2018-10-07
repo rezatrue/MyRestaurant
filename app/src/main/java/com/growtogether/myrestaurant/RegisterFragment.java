@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,6 +86,11 @@ public class RegisterFragment extends Fragment {
                 UserResponse userResponse = response.body();
                 Log.i(TAG, userResponse.getResponse());
                 Log.i(TAG, userResponse.getName());
+                if(userResponse.getResponse().equals("ok")){
+                    nameET.setText(""); emailET.setText(""); phoneET.setText("");   passwardET.setText("");
+                    String name = userResponse.getName();
+                    Toast.makeText(getContext(), name + "'s registration is successfully completed", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
