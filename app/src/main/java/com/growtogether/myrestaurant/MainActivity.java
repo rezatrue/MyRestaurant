@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity  implements LoginFragment.OnLoginFromActivityListener {
+public class MainActivity extends AppCompatActivity  implements LoginFragment.OnLoginFromActivityListener, WelcomeFragment.OnLogOutListener {
 
     public static PrefConfig prefConfig;
 
@@ -17,15 +17,13 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
         prefConfig = new PrefConfig(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new LoginFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-        /*
-
-
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new WelcomeFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-        */
-
+        if (!prefConfig.readLoginStatus()) {
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new LoginFragment())
+                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        }else {
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new WelcomeFragment())
+                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        }
     }
 
 
@@ -37,6 +35,15 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
     @Override
     public void performLogin(String name) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new WelcomeFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+    }
 
+    @Override
+    public void logoutPerformed() {
+        prefConfig.writeLoginStatus(false);
+        prefConfig.writeName("User");
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new LoginFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
 }

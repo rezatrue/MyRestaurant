@@ -1,6 +1,8 @@
 package com.growtogether.myrestaurant;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
@@ -19,6 +21,13 @@ public class WelcomeFragment extends Fragment {
     TextView msg;
     Button btn;
 
+    OnLogOutListener onLogOutListener;
+
+    public interface OnLogOutListener{
+        public void logoutPerformed();
+    }
+
+
     public WelcomeFragment() {
         // Required empty public constructor
     }
@@ -32,14 +41,23 @@ public class WelcomeFragment extends Fragment {
         msg = view.findViewById(R.id.welcomemsg);
         btn =  view.findViewById(R.id.btnLogout);
 
+        msg.setText("Welcome "+ MainActivity.prefConfig.readName());
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                onLogOutListener.logoutPerformed();
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = (Activity) context;
+        onLogOutListener = (OnLogOutListener) activity;
     }
 
 

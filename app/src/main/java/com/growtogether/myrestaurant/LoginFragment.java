@@ -21,6 +21,7 @@ import retrofit2.Response;
 
 
 /**
+ * Design & developed by ALi Reza (Iron Man)
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment {
@@ -112,6 +113,8 @@ public class LoginFragment extends Fragment {
                     userEmailET.setText(""); passwordET.setText("");
                     String name = userResponse.getName();
                     Toast.makeText(getContext(), " welcome " + name , Toast.LENGTH_LONG).show();
+
+                    loginFromActivityListener.performLogin(name);
                 }
             }
 
