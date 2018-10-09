@@ -42,7 +42,6 @@ public class RegisterFragment extends Fragment {
         passwardET =  view.findViewById(R.id.etrpassword);
         registerBtn =  view.findViewById(R.id.registerBtn);
 
-
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

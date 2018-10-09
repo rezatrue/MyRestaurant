@@ -1,7 +1,6 @@
 package com.growtogether.myrestaurant;
-/*
- * Design & Developed by Ali Ahmed Reza (Iron Man)
- */
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -32,19 +31,20 @@ public class LoginFragment extends Fragment {
 
     private ApiInterface apiInterface;
 
-
     public final String TAG = "fragment";
 
     OnLoginFromActivityListener loginFromActivityListener;
 
     public interface OnLoginFromActivityListener{
-        public void performRegister();
-        public void performLogin(String name);
+        void performRegister();
+        void performLogin(String name);
     }
+
 
     public LoginFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +92,7 @@ public class LoginFragment extends Fragment {
         loginFromActivityListener = (OnLoginFromActivityListener) activity;
     }
 
+
     public void performLogin(){
 
         String uEmail = userEmailET.getText().toString();
@@ -120,5 +121,7 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
+
 
 }
