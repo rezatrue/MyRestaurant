@@ -59,12 +59,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         menuServiceApi = retrofit.create(MenuServiceApi.class);
 
-        item_name = findViewById(R.id.et_user_name);
-        item_price = findViewById(R.id.et_user_phone);
-        item_description = findViewById(R.id.et_user_address);
+        item_name = findViewById(R.id.et_res_name);
+        item_price = findViewById(R.id.et_res_phone);
+        item_description = findViewById(R.id.et_res_address);
         btn_add = findViewById(R.id.btn_add);
         btn_viewlist = findViewById(R.id.btn_viewlist);
-        mImageView = findViewById(R.id.iv_user_image);
+        mImageView = findViewById(R.id.iv_res_image);
 
         itemDatabaseOperation = new ItemDatabaseOperation(this);
         btn_add.setOnClickListener(this);
@@ -90,7 +90,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(AddItemActivity.this,ItemListActivity.class));
                 break;
 
-            case R.id.iv_user_image:
+            case R.id.iv_res_image:
                 dispatchTakePictureIntent();
                 Toast.makeText(getApplicationContext(), "Image icon clicked" , Toast.LENGTH_LONG).show();
                 break;

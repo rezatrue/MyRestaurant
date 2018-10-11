@@ -19,12 +19,13 @@ import android.widget.TextView;
  */
 public class WelcomeFragment extends Fragment {
     TextView msg;
-    Button btn;
+    Button btnLogout, btnCreateRes;
 
     OnLogOutListener onLogOutListener;
 
     public interface OnLogOutListener{
         public void logoutPerformed();
+        public void switchToCreateRestaurant();
     }
 
 
@@ -39,14 +40,23 @@ public class WelcomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
         msg = view.findViewById(R.id.welcomemsg);
-        btn =  view.findViewById(R.id.btnLogout);
+        btnLogout =  view.findViewById(R.id.btnLogout);
+        btnCreateRes =  view.findViewById(R.id.btn_res_create);
+
 
         msg.setText("Welcome "+ MainActivity.prefConfig.readName());
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onLogOutListener.logoutPerformed();
+            }
+        });
+
+        btnCreateRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLogOutListener.switchToCreateRestaurant();
             }
         });
 

@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class UserRegistrationActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText userName, userEmial, userPhone, userAddress;
@@ -23,11 +20,11 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
-        userName = findViewById(R.id.et_user_name);
-        userEmial = findViewById(R.id.et_user_email);
-        userPhone = findViewById(R.id.et_user_phone);
-        userAddress = findViewById(R.id.et_user_address);
-        userImage = findViewById(R.id.iv_user_image);
+        userName = findViewById(R.id.et_res_name);
+        userEmial = findViewById(R.id.et_res_longitude);
+        userPhone = findViewById(R.id.et_res_phone);
+        userAddress = findViewById(R.id.et_res_address);
+        userImage = findViewById(R.id.iv_res_image);
         btnSubmit = findViewById(R.id.btn_register);
 
         btnSubmit.setOnClickListener(this);

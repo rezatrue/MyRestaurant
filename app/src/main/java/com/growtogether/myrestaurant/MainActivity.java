@@ -46,4 +46,10 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new LoginFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
+
+    @Override
+    public void switchToCreateRestaurant() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new CreateRestaurantFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+    }
 }

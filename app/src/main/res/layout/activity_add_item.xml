@@ -14,7 +14,7 @@
         >
 
         <EditText
-            android:id="@+id/et_user_phone"
+            android:id="@+id/et_res_phone"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
@@ -24,12 +24,12 @@
             android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/et_user_address"
-            app:layout_constraintStart_toStartOf="@+id/et_user_address"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_name" />
+            app:layout_constraintEnd_toEndOf="@+id/et_res_address"
+            app:layout_constraintStart_toStartOf="@+id/et_res_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_res_name" />
 
         <EditText
-            android:id="@+id/et_user_address"
+            android:id="@+id/et_res_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -41,10 +41,10 @@
             android:inputType="textMultiLine|textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_address"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/et_res_phone" />
 
         <ImageView
-            android:id="@+id/iv_user_image"
+            android:id="@+id/iv_res_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -65,7 +65,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/item_name"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_user_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_name"
             app:layout_constraintStart_toStartOf="@+id/tv_phone" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/item_price"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_user_phone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_phone"
             app:layout_constraintStart_toStartOf="@+id/tv_address" />
 
         <TextView
@@ -85,11 +85,11 @@
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
             android:text="@string/item_description"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_user_address"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_address"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/et_user_name"
+            android:id="@+id/et_res_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -99,9 +99,9 @@
             android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/et_user_phone"
-            app:layout_constraintStart_toStartOf="@+id/et_user_phone"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
+            app:layout_constraintEnd_toEndOf="@+id/et_res_phone"
+            app:layout_constraintStart_toStartOf="@+id/et_res_phone"
+            app:layout_constraintTop_toBottomOf="@+id/iv_res_image" />
 
         <Button
             android:id="@+id/btn_add"
@@ -115,7 +115,7 @@
             android:text="@string/item_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_address" />
+            app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
 
         <Button
             android:id="@+id/btn_viewlist"
@@ -129,7 +129,7 @@
             android:text="@string/item_viewlist"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_address" />
+            app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
 
 
     </android.support.constraint.ConstraintLayout>

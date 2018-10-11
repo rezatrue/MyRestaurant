@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserRegistrationActivity">
+    tools:context=".CreateRestaurantFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
@@ -16,36 +16,62 @@
             android:id="@+id/tv_longitude"
             android:layout_width="105dp"
             android:layout_height="23dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/user_email"
+            android:layout_marginLeft="8dp"
+            android:text="Longitude"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_res_longitude"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_latitude"
+            android:layout_width="105dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Latitude"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_latitude"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/et_res_longitude"
-            android:layout_width="231dp"
+            android:layout_width="0dp"
             android:layout_height="46dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="32dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:ems="10"
             android:inputType="text|textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_longitude"
+            app:layout_constraintStart_toStartOf="@+id/et_res_latitude"
             app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
+
+        <EditText
+            android:id="@+id/et_res_latitude"
+            android:layout_width="232dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:inputType="text|textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.16"
+            app:layout_constraintStart_toEndOf="@+id/tv_latitude"
+            app:layout_constraintTop_toBottomOf="@+id/et_res_longitude" />
 
         <EditText
             android:id="@+id/et_res_phone"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="@+id/et_res_address"
@@ -56,14 +82,11 @@
             android:id="@+id/et_res_address"
             android:layout_width="0dp"
             android:layout_height="46dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="36dp"
             android:ems="10"
             android:inputType="text|textMultiLine|textPostalAddress"
-            app:layout_constraintEnd_toEndOf="@+id/et_res_longitude"
             app:layout_constraintStart_toStartOf="@+id/et_res_longitude"
             app:layout_constraintTop_toBottomOf="@+id/et_res_phone" />
 
@@ -71,11 +94,11 @@
             android:id="@+id/iv_res_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +109,6 @@
             android:id="@+id/tv_name"
             android:layout_width="74dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:text="@string/user_name"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_res_name"
             app:layout_constraintStart_toStartOf="@+id/tv_phone" />
@@ -96,8 +117,8 @@
             android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/user_phone"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_res_phone"
             app:layout_constraintStart_toStartOf="@+id/tv_address" />
@@ -115,31 +136,29 @@
         <EditText
             android:id="@+id/et_res_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="47dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/et_res_phone"
             app:layout_constraintStart_toStartOf="@+id/et_res_phone"
             app:layout_constraintTop_toBottomOf="@+id/iv_res_image" />
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_res_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="@string/user_regis"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.527"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_res_longitude" />
+            app:layout_constraintTop_toBottomOf="@+id/et_res_latitude" />
 
 
     </android.support.constraint.ConstraintLayout>
