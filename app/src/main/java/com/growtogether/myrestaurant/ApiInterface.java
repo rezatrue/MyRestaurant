@@ -18,6 +18,7 @@ public interface ApiInterface {
     @GET("user/login.php")
     Call<UserResponse> getLoginResponse(@Query("user_email") String useremail, @Query("user_password") String userpassword);
 
-
+    @POST("restaurant/create.php")
+    Call<RestaurantResponse> getRestaurantResponse(@Body Restaurant restaurant);
 
 }

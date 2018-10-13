@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
         prefConfig = new PrefConfig(this);
 
-        if (!prefConfig.readLoginStatus()) {
+        if(savedInstanceState != null) return;
+
+        if (prefConfig.readLoginStatus()) {
             getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new LoginFragment())
                     .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         }else {
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
     @Override
     public void performLogin(String name) {
+        prefConfig.writeName(name);
+        prefConfig.writeLoginStatus(true);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new WelcomeFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }

@@ -20,7 +20,7 @@ import android.widget.TextView;
 public class WelcomeFragment extends Fragment {
     TextView msg;
     Button btnLogout, btnCreateRes;
-
+    int userId;
     OnLogOutListener onLogOutListener;
 
     public interface OnLogOutListener{
@@ -43,8 +43,9 @@ public class WelcomeFragment extends Fragment {
         btnLogout =  view.findViewById(R.id.btnLogout);
         btnCreateRes =  view.findViewById(R.id.btn_res_create);
 
-
         msg.setText("Welcome "+ MainActivity.prefConfig.readName());
+
+//        if((userId = MainActivity.prefConfig.readUserId()) != 0) // need to concentrate later
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

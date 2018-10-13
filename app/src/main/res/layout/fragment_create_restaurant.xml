@@ -42,7 +42,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:ems="10"
-            android:inputType="text|textEmailAddress"
+            android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/et_res_latitude"
             app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
@@ -57,7 +57,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
-            android:inputType="text|textEmailAddress"
+            android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toEndOf="@+id/tv_latitude"
