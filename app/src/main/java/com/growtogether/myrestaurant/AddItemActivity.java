@@ -19,12 +19,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,8 +46,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     Button btn_add, btn_viewlist;
     ImageView mImageView;
 
-    private static final String BASE_URL = "http://192.168.0.157/api/product/";
-    //private static final String BASE_URL = "http://192.168.0.104/api/product/";
+    //private static final String BASE_URL = "http://192.168.0.157/api/product/";
+    private static final String BASE_URL = "http://192.168.0.101/api/product/";
     //private static final String BASE_URL = "http://192.168.40.215/api/product/";
     //private static final String BASE_URL = "http://192.168.40.215/api/product/";
 
@@ -56,7 +60,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create(gson)).build();
         menuServiceApi = retrofit.create(MenuServiceApi.class);
 
         item_name = findViewById(R.id.et_res_name);

@@ -140,10 +140,9 @@ public class CreateRestaurantFragment extends Fragment {
             @Override
             public void onResponse(Call<RestaurantResponse> call, Response<RestaurantResponse> response) {
                 Log.i(TAG, "response ->: "+ response.code());
-                if(response.code() == 200)
+                if(response.isSuccessful())
                     if(response.body().getResponse().equalsIgnoreCase("ok"))
-                    Log.i(TAG, "restaurant name ->: "+response.body().getName());
-
+                        Log.i(TAG, "restaurant name ->: "+response.body().getName());
             }
 
             @Override
@@ -153,7 +152,6 @@ public class CreateRestaurantFragment extends Fragment {
         });
 
     }
-
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

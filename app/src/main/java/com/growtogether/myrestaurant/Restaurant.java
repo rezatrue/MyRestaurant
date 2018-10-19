@@ -6,9 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class Restaurant {
 
 
+    @SerializedName("restaurantid")
+    @Expose
+    public int restaurantSerialNo;
     @SerializedName("base64encodedImage")
     @Expose
-    public String restaurantImage;
+    public Object restaurantImage;
     @SerializedName("name")
     @Expose
     public String restaurantName;
@@ -27,16 +30,37 @@ public class Restaurant {
     @SerializedName("userid")
     @Expose
     public int userSerialNo;
+    @SerializedName("created")
+    @Expose
+    public String restaurantCreated;
+
+
 
     public Restaurant() {
     }
 
-    public String getRestaurantImage() {
+    public int getRestaurantSerialNo() {
+        return restaurantSerialNo;
+    }
+
+    public void setRestaurantSerialNo(int restaurantSerialNo) {
+        this.restaurantSerialNo = restaurantSerialNo;
+    }
+
+    public String getRestaurantCreated() {
+        return restaurantCreated;
+    }
+
+    public void setRestaurantCreated(String restaurantCreated) {
+        this.restaurantCreated = restaurantCreated;
+    }
+
+    public Object getRestaurantImage() {
         return restaurantImage;
     }
 
-    public void setRestaurantImage(String restaurantImageUrl) {
-        this.restaurantImage = restaurantImageUrl;
+    public void setRestaurantImage(Object restaurantImage) {
+        this.restaurantImage = restaurantImage;
     }
 
     public String getRestaurantName() {

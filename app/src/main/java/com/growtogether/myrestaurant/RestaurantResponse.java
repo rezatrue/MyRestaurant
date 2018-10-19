@@ -1,12 +1,15 @@
 package com.growtogether.myrestaurant;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RestaurantResponse {
 
     @SerializedName("response")
+    @Expose
     public String response;
     @SerializedName("name")
+    @Expose
     public String name;
 
 
