@@ -1,6 +1,7 @@
 package com.growtogether.myrestaurant;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -43,7 +44,8 @@ public class CreateRestaurantFragment extends Fragment {
 
 
     double latitude,longitude;
-    Context context;
+    //Context context;
+    Activity activity;
 
     ImageView imageIV;
     EditText nameET,phoneET, addressET, longitudeET, latitudeET;
@@ -55,6 +57,12 @@ public class CreateRestaurantFragment extends Fragment {
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
 
+
+    OnRestaurantCreateListener onRestaurantCreateListener;
+
+    public interface OnRestaurantCreateListener{
+        public void switchToRestaurantList();
+    }
 
     public CreateRestaurantFragment() {
 
@@ -109,8 +117,9 @@ public class CreateRestaurantFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
-
+        //this.context = context;
+        this.activity = (Activity) context;
+        onRestaurantCreateListener = (OnRestaurantCreateListener) activity;
     }
 
 
@@ -140,9 +149,11 @@ public class CreateRestaurantFragment extends Fragment {
             @Override
             public void onResponse(Call<RestaurantResponse> call, Response<RestaurantResponse> response) {
                 Log.i(TAG, "response ->: "+ response.code());
-                if(response.isSuccessful())
-                    if(response.body().getResponse().equalsIgnoreCase("ok"))
-                        Log.i(TAG, "restaurant name ->: "+response.body().getName());
+                if(response.isSuccessful()) {
+                    nameET.setText(""); addressET.setText(""); phoneET.setText(""); longitudeET.setText(""); latitudeET.setText("");
+                    onRestaurantCreateListener.switchToRestaurantList();
+                }
+
             }
 
             @Override
@@ -156,7 +167,7 @@ public class CreateRestaurantFragment extends Fragment {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
@@ -166,7 +177,7 @@ public class CreateRestaurantFragment extends Fragment {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(context,
+                Uri photoURI = FileProvider.getUriForFile(activity,
                         "com.growtogether.myrestaurant.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
@@ -179,7 +190,7 @@ public class CreateRestaurantFragment extends Fragment {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -196,7 +207,7 @@ public class CreateRestaurantFragment extends Fragment {
         File f = new File(mCurrentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
-        context.sendBroadcast(mediaScanIntent);
+        activity.sendBroadcast(mediaScanIntent);
     }
 
     private void setPic() {
