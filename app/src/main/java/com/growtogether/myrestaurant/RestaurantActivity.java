@@ -15,9 +15,13 @@ public class RestaurantActivity extends AppCompatActivity  implements CreateRest
 
         Intent intent = getIntent();
         int userid = intent.getIntExtra(MainActivity.USERID, 0);
+        int switchTo = intent.getIntExtra(MainActivity.SWITCH, 0);
 
         Toast.makeText(this, "User ID : "+ userid , Toast.LENGTH_LONG).show();
-
+        if(switchTo == 0)
+        getSupportFragmentManager().beginTransaction().add(R.id.restaurant_fragment_container, new RestaurantListFragment())
+                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        if(switchTo == 1)
         getSupportFragmentManager().beginTransaction().add(R.id.restaurant_fragment_container, new CreateRestaurantFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 

@@ -73,7 +73,6 @@ class ViewHolder{
         viewHolder.itemPrice.setText(items.get(position).getItemPrice()+"");
         viewHolder.itemDescription.setText(items.get(position).getItemDescription());
 
-
         return convertView;
     }
 }

@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
     public static PrefConfig prefConfig;
     public static final String USERID = "userid";
+    public static final String SWITCH = "Switch";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,15 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     public void switchToCreateRestaurant() {
         Intent intent = new Intent(this, RestaurantActivity.class);
         intent.putExtra(USERID, 12); // value must be fetched from db
+        intent.putExtra(SWITCH, 1);
+        startActivity(intent);
+    }
+
+    @Override
+    public void switchToRestaurantList() {
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        intent.putExtra(USERID, 12); // value must be fetched from db
+        intent.putExtra(SWITCH, 0);
         startActivity(intent);
     }
 }

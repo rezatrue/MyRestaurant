@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_res_list"
+        android:layout_width="84dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/tv_res_list_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/iv_res_list"
+        app:layout_constraintTop_toTopOf="@+id/iv_res_list" />
+
+    <TextView
+        android:id="@+id/tv_res_list_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tv_res_list_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_res_list_name" />
+
+    <TextView
+        android:id="@+id/tv_res_list_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tv_res_list_phone"
+        app:layout_constraintTop_toBottomOf="@+id/tv_res_list_phone" />
+
+    <Button
+        android:id="@+id/btn_res_list"
+        android:layout_width="91dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_res_list" />
+
+    <ImageView
+        android:id="@+id/iv_res_list_favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_res_list"
+        app:layout_constraintStart_toStartOf="@+id/btn_res_list"
+        app:layout_constraintTop_toBottomOf="@+id/btn_res_list"
+        app:srcCompat="@android:drawable/btn_star_big_off" />
+</android.support.constraint.ConstraintLayout>

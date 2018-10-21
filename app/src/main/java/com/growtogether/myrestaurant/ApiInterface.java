@@ -21,4 +21,8 @@ public interface ApiInterface {
     @POST("restaurant/create.php")
     Call<RestaurantResponse> getRestaurantResponse(@Body Restaurant restaurant);
 
+    @GET("restaurant/list.php")
+    Call<RestaurantListResponse> getRestaurantList();
+
+
 }

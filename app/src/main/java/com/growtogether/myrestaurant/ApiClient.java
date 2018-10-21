@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ApiClient {
 
     //private static final String BASE_URL = "http://192.168.40.215/api/";
-    private static final String BASE_URL = "http://192.168.0.105/api/";
+    public static final String BASE_URL = "http://192.168.0.105/api/";
     private static Retrofit retrofit = null;
     private static ApiInterface apiInterface = null;
 
