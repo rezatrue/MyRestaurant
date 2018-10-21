@@ -57,18 +57,19 @@ class ViewHolder{
 
         //String baseUrl = "http://192.168.0.104/api/";
         //String baseUrl = "http://192.168.40.215/api/";
-        String baseUrl = "http://192.168.0.157/api/";
+        String baseUrl = "http://192.168.0.100/api/";
         String urltxt = baseUrl + items.get(position).getItemImageUrl();
         Log.e("data", urltxt + " <- URL ->");
         Picasso.get().load(urltxt).into(viewHolder.itemImageview);
 
         // this section needed for add list
+        /*
         try {
             viewHolder.itemImageview.setImageBitmap(items.get(position).getItemBitmapImage());
         }catch(Exception e ){
             e.getMessage();
         }
-
+        */
         viewHolder.itemName.setText(items.get(position).getItemName());
         viewHolder.itemPrice.setText(items.get(position).getItemPrice()+"");
         viewHolder.itemDescription.setText(items.get(position).getItemDescription());

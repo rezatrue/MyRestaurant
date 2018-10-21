@@ -51,7 +51,7 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.restaurant_single_row, parent, false);
 
-            holder.restaurantImageview =  convertView.findViewById(R.id.iv_res_image);
+            holder.restaurantImageview =  convertView.findViewById(R.id.iv_res_list);
             holder.restaurantName =  convertView.findViewById(R.id.tv_res_list_name);
             holder.restaurantAddress =  convertView.findViewById(R.id.tv_res_list_address);
             holder.restaurantPhone =  convertView.findViewById(R.id.tv_res_list_phone);
@@ -63,18 +63,19 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
             holder = (ViewHolder) convertView.getTag();
         }
 
+        /*
         String imagePath = ApiClient.BASE_URL + restaurants.get(position).getImageurl();
         Log.i("fragment", "URL : " + imagePath );
         Uri uri = Uri.fromFile(new File(imagePath));
-        /*
-        try {
-            Bitmap bitmap = Picasso.get().load(uri).centerCrop().get();
-            holder.restaurantImageview.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            Log.i("fragment", e.getMessage() );
-        }
+        Picasso.get().load(imagePath).into(holder.restaurantImageview);
+
         */
-        //Picasso.get().load(imagePath).into(holder.restaurantImageview);
+
+        String urltxt = ApiClient.BASE_URL + restaurants.get(position).getImageurl();
+        Log.e("fragment", urltxt + " <- URL ->");
+        Picasso.get().load(urltxt).into(holder.restaurantImageview);
+
+
         holder.restaurantName.setText(restaurants.get(position).getName());
         holder.restaurantAddress.setText(restaurants.get(position).getAddress());
         holder.restaurantPhone.setText(restaurants.get(position).getPhone());
