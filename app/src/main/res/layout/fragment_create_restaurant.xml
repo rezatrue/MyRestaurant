@@ -12,39 +12,21 @@
         android:layout_height="wrap_content"
         >
 
-        <TextView
-            android:id="@+id/tv_longitude"
-            android:layout_width="105dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="Longitude"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_longitude"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_latitude"
-            android:layout_width="105dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="Latitude"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_latitude"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <EditText
             android:id="@+id/et_res_longitude"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
+            android:hint="Longitude"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/et_res_latitude"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
 
         <EditText
@@ -57,15 +39,15 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
+            android:hint="Latitude"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.16"
-            app:layout_constraintStart_toEndOf="@+id/tv_latitude"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_longitude" />
 
         <EditText
             android:id="@+id/et_res_phone"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -73,75 +55,58 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
+            android:hint="Phone no"
             android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="@+id/et_res_address"
-            app:layout_constraintStart_toStartOf="@+id/et_res_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_name" />
 
         <EditText
             android:id="@+id/et_res_address"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
+            android:hint="Address"
             android:inputType="text|textMultiLine|textPostalAddress"
-            app:layout_constraintStart_toStartOf="@+id/et_res_longitude"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_phone" />
 
         <ImageView
             android:id="@+id/iv_res_image"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="74dp"
-            android:layout_height="25dp"
-            android:text="@string/user_name"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_name"
-            app:layout_constraintStart_toStartOf="@+id/tv_phone" />
-
-        <TextView
-            android:id="@+id/tv_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="@string/user_phone"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_phone"
-            app:layout_constraintStart_toStartOf="@+id/tv_address" />
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="84dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
-            android:text="@string/user_address"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_res_address"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <EditText
             android:id="@+id/et_res_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
+            android:hint="Name"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="@+id/et_res_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_res_image" />
 
         <Button
@@ -155,7 +120,7 @@
             android:layout_marginRight="8dp"
             android:text="@string/user_regis"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_latitude" />
 

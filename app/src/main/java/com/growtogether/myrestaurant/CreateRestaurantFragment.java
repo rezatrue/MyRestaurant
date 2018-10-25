@@ -83,6 +83,8 @@ public class CreateRestaurantFragment extends Fragment {
         latitudeET = view.findViewById(R.id.et_res_latitude);
         btn = view.findViewById(R.id.btn_res_register);
 
+        btn.setText("Edit");
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +133,6 @@ public class CreateRestaurantFragment extends Fragment {
         String longitude = longitudeET.getText().toString();
         String latitude = latitudeET.getText().toString();
 
-
         Restaurant restaurant = new Restaurant();
         restaurant.setRestaurantName(name);
         restaurant.setRestaurantAddress(address);
@@ -153,7 +154,6 @@ public class CreateRestaurantFragment extends Fragment {
                     nameET.setText(""); addressET.setText(""); phoneET.setText(""); longitudeET.setText(""); latitudeET.setText("");
                     onRestaurantCreateListener.switchToRestaurantList();
                 }
-
             }
 
             @Override

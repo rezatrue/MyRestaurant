@@ -75,10 +75,18 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
         Log.e("fragment", urltxt + " <- URL ->");
         Picasso.get().load(urltxt).into(holder.restaurantImageview);
 
-
         holder.restaurantName.setText(restaurants.get(position).getName());
         holder.restaurantAddress.setText(restaurants.get(position).getAddress());
         holder.restaurantPhone.setText(restaurants.get(position).getPhone());
+
+
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("fragment", view.getVerticalScrollbarPosition() + " <- position ->");
+            }
+        });
+
 
         return convertView;
 

@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class RestaurantActivity extends AppCompatActivity  implements CreateRestaurantFragment.OnRestaurantCreateListener{
+public class RestaurantActivity extends AppCompatActivity
+        implements CreateRestaurantFragment.OnRestaurantCreateListener, RestaurantListFragment.OnRestaurantListItemListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,12 @@ public class RestaurantActivity extends AppCompatActivity  implements CreateRest
     @Override
     public void switchToRestaurantList() {
         getSupportFragmentManager().beginTransaction().replace(R.id.restaurant_fragment_container, new RestaurantListFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+    }
+
+    @Override
+    public void switchToEditRestaurant() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.restaurant_fragment_container, new CreateRestaurantFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
 }

@@ -34,15 +34,19 @@ public class PrefConfig {
         return sharedPreferences.getString(context.getString(R.string.pref_user_name), "User");
     }
 
+    /*
+    * for user id
+    * */
     public void writeUserId(int id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(context.getString(R.string.pref_user_name), id);
+        editor.putInt(context.getString(R.string.pref_user_id), id);
         editor.commit();
     }
 
     public int readUserId(){
-        return sharedPreferences.getInt(context.getString(R.string.pref_user_name), 0);
+        return sharedPreferences.getInt(context.getString(R.string.pref_user_id), 0);
     }
+
 
     public void displayToast(String msg){
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();

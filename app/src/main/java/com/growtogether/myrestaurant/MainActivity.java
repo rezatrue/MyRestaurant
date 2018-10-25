@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     }
 
     @Override
-    public void performLogin(String name) {
+    public void performLogin(String name, int id) {
         prefConfig.writeName(name);
         prefConfig.writeLoginStatus(true);
+        prefConfig.writeUserId(id); // for user id
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new WelcomeFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     public void logoutPerformed() {
         prefConfig.writeLoginStatus(false);
         prefConfig.writeName("User");
+        prefConfig.writeUserId(0); // for user id
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new LoginFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }

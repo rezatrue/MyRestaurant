@@ -9,6 +9,18 @@ public class UserResponse {
     @SerializedName("name")
     public String name;
 
+    @SerializedName("userid")
+    public int userSerialNo;
+
+    public int getUserSerialNo() {
+        return userSerialNo;
+    }
+
+    public void setUserSerialNo(int userSerialNo) {
+        this.userSerialNo = userSerialNo;
+    }
+
+
     public String getResponse() {
         return response;
     }

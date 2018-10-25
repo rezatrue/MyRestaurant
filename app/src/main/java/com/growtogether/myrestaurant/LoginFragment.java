@@ -38,7 +38,7 @@ public class LoginFragment extends Fragment {
 
     public interface OnLoginFromActivityListener{
         void performRegister();
-        void performLogin(String name);
+        void performLogin(String name, int id);
     }
 
 
@@ -112,9 +112,10 @@ public class LoginFragment extends Fragment {
                 if(userResponse.getResponse().equals("ok")){
                     userEmailET.setText(""); passwordET.setText("");
                     String name = userResponse.getName();
-                    Toast.makeText(getContext(), " welcome " + name , Toast.LENGTH_LONG).show();
+                    int id = userResponse.getUserSerialNo();
+                    Toast.makeText(getContext(), " welcome " + name + "(" + id +")", Toast.LENGTH_LONG).show();
 
-                    loginFromActivityListener.performLogin(name);
+                    loginFromActivityListener.performLogin(name, id);
                 }
             }
 

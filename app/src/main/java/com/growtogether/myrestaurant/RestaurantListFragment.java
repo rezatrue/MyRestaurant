@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,10 +32,18 @@ public class RestaurantListFragment extends Fragment{
     private RestaurantAdapter restaurantAdapter;
     private ArrayList<RestaurantListResponse.Restaurant> restaurants;
 
-    Context context;
+    //Context context;
+    Activity activity;
 
     public final static String TAG = "fragment";
     private ApiInterface apiInterface;
+
+
+    OnRestaurantListItemListener onRestaurantListItemListener;
+
+    public interface OnRestaurantListItemListener{
+        public void switchToEditRestaurant();
+    }
 
     public RestaurantListFragment() {
         // Required empty public constructor
@@ -67,7 +76,7 @@ public class RestaurantListFragment extends Fragment{
                 if(response.isSuccessful()){
                     Log.i("fragment", "Success  " );
                     restaurants = response.body().getRestaurants();
-                    restaurantAdapter = new RestaurantAdapter(context, restaurants);
+                    restaurantAdapter = new RestaurantAdapter(activity, restaurants); // name a change context to activity
                     restaurantListView.setAdapter(restaurantAdapter);
                 }
             }
@@ -80,11 +89,24 @@ public class RestaurantListFragment extends Fragment{
             }
         });
 
+
+        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
+                onRestaurantListItemListener.switchToEditRestaurant();
+            }
+        });
+
+
+
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
+        //this.context = context;
+        this.activity = (Activity) context;
+        onRestaurantListItemListener = (OnRestaurantListItemListener) activity;
     }
 }
