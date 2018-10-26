@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     public static PrefConfig prefConfig;
     public static final String USERID = "userid";
     public static final String SWITCH = "Switch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     public void logoutPerformed() {
         prefConfig.writeLoginStatus(false);
         prefConfig.writeName("User");
-        prefConfig.writeUserId(0); // for user id
+        prefConfig.writeUserId(0);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new LoginFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     @Override
     public void switchToCreateRestaurant() {
         Intent intent = new Intent(this, RestaurantActivity.class);
-        intent.putExtra(USERID, 12); // value must be fetched from db
+        intent.putExtra(USERID, prefConfig.readUserId());
         intent.putExtra(SWITCH, 1);
         startActivity(intent);
     }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     @Override
     public void switchToRestaurantList() {
         Intent intent = new Intent(this, RestaurantActivity.class);
-        intent.putExtra(USERID, 12); // value must be fetched from db
+        intent.putExtra(USERID, prefConfig.readUserId());
         intent.putExtra(SWITCH, 0);
         startActivity(intent);
     }

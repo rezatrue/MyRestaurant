@@ -50,6 +50,7 @@ public class CreateRestaurantFragment extends Fragment {
     ImageView imageIV;
     EditText nameET,phoneET, addressET, longitudeET, latitudeET;
     Button btn;
+    boolean userEdit = false;
 
     public final static String TAG = "fragment";
     private ApiInterface apiInterface;
@@ -82,14 +83,15 @@ public class CreateRestaurantFragment extends Fragment {
         longitudeET = view.findViewById(R.id.et_res_longitude);
         latitudeET = view.findViewById(R.id.et_res_latitude);
         btn = view.findViewById(R.id.btn_res_register);
-
-        btn.setText("Edit");
+        if(userEdit)
+            btn.setText("Edit");
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "button clicked ");
-                createRestaurant();
+                if(!userEdit) createRestaurant();
+                else ; //do something;
             }
         });
 
@@ -139,7 +141,7 @@ public class CreateRestaurantFragment extends Fragment {
         restaurant.setRestaurantPhone(Integer.parseInt(phone));
         restaurant.setRestaurantLatitude(Double.parseDouble(longitude));
         restaurant.setRestaurantLongitude(Double.parseDouble(latitude));
-        restaurant.setUserSerialNo(12); // need to pass id from DB
+        restaurant.setUserSerialNo(RestaurantActivity.userid);
 
         ImageProcessor imageProcessor = new ImageProcessor();
         restaurant.setRestaurantImage(imageProcessor.getEncodedImage(mCurrentPhotoPath));

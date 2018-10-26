@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 public class RestaurantActivity extends AppCompatActivity
         implements CreateRestaurantFragment.OnRestaurantCreateListener, RestaurantListFragment.OnRestaurantListItemListener {
+    public static int userid = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +16,10 @@ public class RestaurantActivity extends AppCompatActivity
         setContentView(R.layout.activity_restaurant);
 
         Intent intent = getIntent();
-        int userid = intent.getIntExtra(MainActivity.USERID, 0);
+        userid = intent.getIntExtra(MainActivity.USERID, 0);
         int switchTo = intent.getIntExtra(MainActivity.SWITCH, 0);
 
-        Toast.makeText(this, "User ID : "+ userid , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "User ID : "+ userid + " switchTo : " + switchTo, Toast.LENGTH_LONG).show();
         if(switchTo == 0)
         getSupportFragmentManager().beginTransaction().add(R.id.restaurant_fragment_container, new RestaurantListFragment())
                     .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();

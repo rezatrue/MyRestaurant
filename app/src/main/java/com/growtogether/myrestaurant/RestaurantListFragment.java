@@ -67,6 +67,16 @@ public class RestaurantListFragment extends Fragment{
         apiInterface = apiClient.getApiInterface();
         restaurants = new ArrayList<>();
 
+        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
+                onRestaurantListItemListener.switchToEditRestaurant();
+            }
+        });
+
+
+        /*
         Call<RestaurantListResponse> restaurantListResponseCall = apiInterface.getRestaurantList();
 
         restaurantListResponseCall.enqueue(new Callback<RestaurantListResponse>() {
@@ -88,17 +98,35 @@ public class RestaurantListFragment extends Fragment{
 
             }
         });
+        */
 
 
-        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        // why RestaurantActivity.userid always Zero & also need to check list size greater than zero before set adopter
+
+        Call<RestaurantListResponse> restaurantListResponseCall = apiInterface.getRestaurantList(RestaurantActivity.userid);
+
+        restaurantListResponseCall.enqueue(new Callback<RestaurantListResponse>() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
-                onRestaurantListItemListener.switchToEditRestaurant();
+            public void onResponse(Call<RestaurantListResponse> call, Response<RestaurantListResponse> response) {
+                if(response.isSuccessful()){
+                    Log.i("fragment", "Success  " );
+                    Log.i("fragment", "id  " + RestaurantActivity.userid);
+
+                    restaurants = response.body().getRestaurants();
+                    restaurantAdapter = new RestaurantAdapter(activity, restaurants); // name a change context to activity
+                    restaurantListView.setAdapter(restaurantAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestaurantListResponse> call, Throwable t) {
+                //Toast.makeText(context, "failed : " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e(TAG, "failed : " + t.getMessage());
+
             }
         });
-
-
 
     }
 
