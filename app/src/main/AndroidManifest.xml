@@ -33,7 +33,6 @@
 
         <activity android:name=".AddItemActivity" />
         <activity android:name=".ItemListActivity" />
-
         <activity android:name=".UserRegistrationActivity" />
         <activity android:name=".RestaurantMenuActivity" />
         <activity android:name=".MainActivity">
@@ -43,8 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RestaurantActivity"></activity>
+        <activity android:name=".RestaurantActivity" />
+        <activity android:name=".ManageRestaurantsActivity"></activity>
     </application>
 
 </manifest>

@@ -38,7 +38,6 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
         TextView restaurantName;
         TextView restaurantAddress;
         TextView restaurantPhone;
-        Button btn;
     }
 
     @NonNull
@@ -55,7 +54,6 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
             holder.restaurantName =  convertView.findViewById(R.id.tv_res_list_name);
             holder.restaurantAddress =  convertView.findViewById(R.id.tv_res_list_address);
             holder.restaurantPhone =  convertView.findViewById(R.id.tv_res_list_phone);
-            holder.btn =  convertView.findViewById(R.id.btn_res_list);
             convertView.setTag(holder);
             Log.i("fragment", "adepter 0" );
         }else {
@@ -78,14 +76,6 @@ class RestaurantAdapter extends ArrayAdapter<RestaurantListResponse.Restaurant> 
         holder.restaurantName.setText(restaurants.get(position).getName());
         holder.restaurantAddress.setText(restaurants.get(position).getAddress());
         holder.restaurantPhone.setText(restaurants.get(position).getPhone());
-
-
-        holder.btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("fragment", view.getVerticalScrollbarPosition() + " <- position ->");
-            }
-        });
 
 
         return convertView;

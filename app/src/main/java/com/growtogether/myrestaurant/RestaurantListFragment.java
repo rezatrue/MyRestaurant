@@ -3,6 +3,7 @@ package com.growtogether.myrestaurant;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -67,13 +68,6 @@ public class RestaurantListFragment extends Fragment{
         apiInterface = apiClient.getApiInterface();
         restaurants = new ArrayList<>();
 
-        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
-                onRestaurantListItemListener.switchToEditRestaurant();
-            }
-        });
 
 
         /*
@@ -117,6 +111,7 @@ public class RestaurantListFragment extends Fragment{
                     restaurants = response.body().getRestaurants();
                     restaurantAdapter = new RestaurantAdapter(activity, restaurants); // name a change context to activity
                     restaurantListView.setAdapter(restaurantAdapter);
+
                 }
             }
 
@@ -127,6 +122,26 @@ public class RestaurantListFragment extends Fragment{
 
             }
         });
+
+
+        restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
+                Log.i("fragment", "item clicked : ");
+                RestaurantListResponse.Restaurant restaurant = restaurants.get(i);
+
+                Intent intent = new Intent(activity, ManageRestaurantsActivity.class);
+                intent.putExtra("SerialNo", restaurants.get(i).getSerialno());
+                intent.putExtra("Name", restaurants.get(i).getName());
+                intent.putExtra("Phone", restaurants.get(i).getPhone());
+                intent.putExtra("Address", restaurants.get(i).getAddress());
+                intent.putExtra("ImageUrl", restaurants.get(i).getImageurl());
+                startActivity(intent);
+                //onRestaurantListItemListener.switchToEditRestaurant();
+            }
+        });
+
 
     }
 
