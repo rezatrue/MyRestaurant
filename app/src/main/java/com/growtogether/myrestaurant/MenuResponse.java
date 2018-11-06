@@ -2,6 +2,7 @@ package com.growtogether.myrestaurant;
 /*
  * Design & Developed by Ali Reza (Iron Man)
  */
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,13 +11,13 @@ public class MenuResponse {
 
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private ArrayList<Item> items = null;
 
-    public List<Item> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
@@ -24,7 +25,7 @@ public class MenuResponse {
 
         @SerializedName("serialno")
         @Expose
-        private String serialno;
+        private int serialno;
         @SerializedName("imageurl")
         @Expose
         private String imageurl;
@@ -33,22 +34,39 @@ public class MenuResponse {
         private String name;
         @SerializedName("category")
         @Expose
-        private String category;
+        private int category;
         @SerializedName("description")
         @Expose
         private String description;
         @SerializedName("price")
         @Expose
-        private String price;
+        private double price;
+        @SerializedName("restaurantSerialNo")
+        @Expose
+        private int restaurantSerialNo;
         @SerializedName("created")
         @Expose
         private String created;
 
-        public String getSerialno() {
+        public Item() {
+        }
+
+        public Item(int serialno, String imageurl, String name, int category, String description, double price, int restaurantSerialNo, String created) {
+            this.serialno = serialno;
+            this.imageurl = imageurl;
+            this.name = name;
+            this.category = category;
+            this.description = description;
+            this.price = price;
+            this.restaurantSerialNo = restaurantSerialNo;
+            this.created = created;
+        }
+
+        public int getSerialno() {
             return serialno;
         }
 
-        public void setSerialno(String serialno) {
+        public void setSerialno(int serialno) {
             this.serialno = serialno;
         }
 
@@ -68,11 +86,11 @@ public class MenuResponse {
             this.name = name;
         }
 
-        public String getCategory() {
+        public int getCategory() {
             return category;
         }
 
-        public void setCategory(String category) {
+        public void setCategory(int category) {
             this.category = category;
         }
 
@@ -84,12 +102,20 @@ public class MenuResponse {
             this.description = description;
         }
 
-        public String getPrice() {
+        public double getPrice() {
             return price;
         }
 
-        public void setPrice(String price) {
+        public void setPrice(double price) {
             this.price = price;
+        }
+
+        public int getRestaurantSerialNo() {
+            return restaurantSerialNo;
+        }
+
+        public void setRestaurantSerialNo(int restaurantSerialNo) {
+            this.restaurantSerialNo = restaurantSerialNo;
         }
 
         public String getCreated() {
@@ -99,7 +125,6 @@ public class MenuResponse {
         public void setCreated(String created) {
             this.created = created;
         }
-
     }
 
 

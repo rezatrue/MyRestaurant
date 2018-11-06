@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class ItemDatabaseOperation {
         sqLiteDatabase.close();
     }
 
-    public boolean addItem(Item item){
+    public boolean addItem(Item1 item){
         this.open();
 
         ContentValues contentValues = new ContentValues();
@@ -44,8 +43,8 @@ public class ItemDatabaseOperation {
     }
 
 
-    public ArrayList<Item> getAllItems(){
-        ArrayList<Item> items = new ArrayList<>();
+    public ArrayList<Item1> getAllItems(){
+        ArrayList<Item1> items = new ArrayList<>();
         this.open();
         Cursor cursor = sqLiteDatabase.query(itemDatabaseHelper.ITEM_TABLE,null,null,null, null, null,null);
         cursor.moveToFirst();
@@ -57,7 +56,7 @@ public class ItemDatabaseOperation {
                 double price = cursor.getDouble(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_PRICE));
                 String description = cursor.getString(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_DESCRIPTION));
                 int status = cursor.getInt(cursor.getColumnIndex(itemDatabaseHelper.TABLE_COL_ITEM_STATUS));
-                Item item = new Item(byteImage,name,description,price);
+                Item1 item = new Item1(byteImage,name,description,price);
                 items.add(item);
                 cursor.moveToNext();
             }

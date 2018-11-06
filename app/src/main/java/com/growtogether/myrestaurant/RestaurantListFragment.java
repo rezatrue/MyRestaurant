@@ -129,14 +129,16 @@ public class RestaurantListFragment extends Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
                 Log.i("fragment", "item clicked : ");
-                RestaurantListResponse.Restaurant restaurant = restaurants.get(i);
+                //RestaurantListResponse.Restaurant restaurant = restaurants.get(i);
 
                 Intent intent = new Intent(activity, ManageRestaurantsActivity.class);
-                intent.putExtra("SerialNo", restaurants.get(i).getSerialno());
+                intent.putExtra("RestaurantSerialNo", restaurants.get(i).getSerialno());
+                intent.putExtra("UserSerialNo", restaurants.get(i).getUserid());
                 intent.putExtra("Name", restaurants.get(i).getName());
                 intent.putExtra("Phone", restaurants.get(i).getPhone());
                 intent.putExtra("Address", restaurants.get(i).getAddress());
                 intent.putExtra("ImageUrl", restaurants.get(i).getImageurl());
+
                 startActivity(intent);
                 //onRestaurantListItemListener.switchToEditRestaurant();
             }

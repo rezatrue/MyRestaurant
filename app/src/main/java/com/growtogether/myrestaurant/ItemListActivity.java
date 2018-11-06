@@ -19,10 +19,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemListActivity extends AppCompatActivity {
-
+    // NOT IN USER ANYMORE
     private ListView itemListView;
     private ItemAdapter itemAdapter;
-    private ArrayList<Item> items;
+    private ArrayList<Item1> items;
     // for Sqlite db
     private ItemDatabaseOperation itemDatabaseOperation;
 
@@ -69,12 +69,12 @@ public class ItemListActivity extends AppCompatActivity {
                         MenuResponse.Item item = it.next();
                         Log.e("data",item.getName()+" <- Name ->");
 
-                        Item item1 = new Item(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
-                        items.add(item1);
+                        //Item1 item1 = new Item1(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
+                        //items.add(item1);
                     }
 
-                    itemAdapter = new ItemAdapter(getApplicationContext(),items);
-                    itemListView.setAdapter(itemAdapter);
+                    //itemAdapter = new ItemAdapter(getApplicationContext(),items);
+                    //itemListView.setAdapter(itemAdapter);
 
                 }
             }

@@ -161,7 +161,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         String description = item_description.getText().toString();
 
         if(name.length() > 0 && pricetxt.length() > 0) {
-            Item item = new Item(bitmap, name, description, price);
+            Item1 item = new Item1(bitmap, name, description, price);
             itemDatabaseOperation.addItem(item);
 
             item_name.setText("");

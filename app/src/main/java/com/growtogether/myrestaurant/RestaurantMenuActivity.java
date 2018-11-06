@@ -11,7 +11,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +22,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
 
     private ListView itemListView;
     private ItemAdapter itemAdapter;
-    private ArrayList<Item> items;
+    private ArrayList<Item1> items;
     private ItemDatabaseOperation itemDatabaseOperation; //
 
     //private static final String BASE_URL = "http://192.168.40.215/api/product/";
@@ -61,12 +60,12 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                         MenuResponse.Item item = it.next();
                         Log.e("data",item.getName()+" <- Name ->");
 
-                        Item item1 = new Item(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
-                        items.add(item1);
+                        //Item1 item1 = new Item1(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
+                        //items.add(item1);
                     }
 
-                    itemAdapter = new ItemAdapter(getApplicationContext(),items);
-                    itemListView.setAdapter(itemAdapter);
+                    //itemAdapter = new ItemAdapter(getApplicationContext(),items);
+                    //itemListView.setAdapter(itemAdapter);
 
                 }
             }

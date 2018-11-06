@@ -11,7 +11,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
-public class Item {
+public class Item1 {
 
     private int itemSerialNo;
     private String itemImageUrl;
@@ -31,10 +31,10 @@ public class Item {
         this.itemImageUrl = itemImageUrl;
     }
 
-    public Item(){
+    public Item1(){
     }
 
-    public Item(int itemSerialNo, String itemImageUrl,String itemName, int itemCatId, String itemDescription, double itemPrice, String itemCreated) {
+    public Item1(int itemSerialNo, String itemImageUrl, String itemName, int itemCatId, String itemDescription, double itemPrice, String itemCreated) {
         this.itemSerialNo = itemSerialNo;
         this.itemImageUrl = itemImageUrl;
         this.itemName = itemName;
@@ -45,14 +45,14 @@ public class Item {
     }
 
 
-    public Item(Bitmap bitmap, String itemName, String itemDescription, double itemPrice) {
+    public Item1(Bitmap bitmap, String itemName, String itemDescription, double itemPrice) {
         setItemBitmapImage(bitmap);
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
     }
 
-    public Item(byte[] image, String itemName, String itemDescription, double itemPrice) {
+    public Item1(byte[] image, String itemName, String itemDescription, double itemPrice) {
         setItemImage(image);
         this.itemName = itemName;
         this.itemDescription = itemDescription;

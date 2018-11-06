@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+import com.growtogether.myrestaurant.MenuResponse.Item;
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -60,8 +60,12 @@ public class ItemListFragment extends Fragment {
 
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
-
+        // need to add retaurant_id with this string
+        int restaurant_id = ManageRestaurantsActivity.restaurantSerialNo;
         String urlString = String.format("item/read.php");
+        if (restaurant_id > 0)
+            urlString = String.format("item/read.php?restaurant_id="+ restaurant_id);
+
         Call<MenuResponse> itemsResponseCall = apiInterface.getItemsResponse(urlString);
 
         itemsResponseCall.enqueue(new Callback<MenuResponse>() {
@@ -71,25 +75,9 @@ public class ItemListFragment extends Fragment {
 
                 if(response.code() == 200){
                     MenuResponse menuResponse = response.body();
-                    List<MenuResponse.Item> menuItems = menuResponse.getItems();
-
-                    Iterator<MenuResponse.Item> it = menuItems.iterator();
-                    while(it.hasNext()){
-                        MenuResponse.Item item = it.next();
-                        Log.i("fragment",item.getName()+" <- Name ->");
-                        Log.i("fragment",item.getImageurl()+" <- Image URL ->");
-                        Log.i("fragment",item.getPrice()+" <- Price ->");
-                        Log.i("fragment",item.getSerialno()+" <- SerialNo ->");
-                        Log.i("fragment",item.getDescription()+" <- Description ->");
-                        Log.i("fragment",item.getCreated()+" <- Created ->");
-
-                        Item item1 = new Item(Integer.parseInt(item.getSerialno()), item.getImageurl(), item.getName(), Integer.parseInt(item.getCategory()), item.getDescription(), Double.parseDouble(item.getPrice()), item.getCreated());
-                        items.add(item1);
-                    }
-
+                    items  = menuResponse.getItems();
                     itemAdapter = new ItemAdapter(activity,items);
                     listView.setAdapter(itemAdapter);
-
                 }
 
             }

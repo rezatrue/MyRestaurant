@@ -14,7 +14,8 @@ public class ManageRestaurantsActivity extends AppCompatActivity {
     ImageView imageView;
     TextView nameTV, phoneTV, addressTV;
     Button button;
-    public static int UserSerialNumber;
+    public static int userSerialNumber;
+    public static int restaurantSerialNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +27,22 @@ public class ManageRestaurantsActivity extends AppCompatActivity {
         phoneTV = findViewById(R.id.tvrphone);
         addressTV = findViewById(R.id.tvraddress);
         button = findViewById(R.id.btnrestaurant);
+
         Bundle bundle = getIntent().getExtras();
-        UserSerialNumber = bundle.getInt("SerialNo", 0);
+        userSerialNumber  = bundle.getInt("UserSerialNo", 0);
+        restaurantSerialNo  = bundle.getInt("RestaurantSerialNo", 0);
         nameTV.setText(bundle.getString("Name"));
         phoneTV.setText(bundle.getString("Phone"));
         addressTV.setText(bundle.getString("Address"));
 
         String urltxt = ApiClient.BASE_URL + bundle.getString("ImageUrl");
-
         Picasso.get().load(urltxt).into(imageView);
 
         getSupportFragmentManager().beginTransaction().add(R.id.manage_restaurant_fragment_container, new ItemListFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+//        getSupportFragmentManager().beginTransaction().add(R.id.manage_restaurant_fragment_container, new AddItemFragment())
+//                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
     }
 
