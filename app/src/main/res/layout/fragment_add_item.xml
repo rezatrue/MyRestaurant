@@ -5,23 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemActivity">
+    tools:context=".AddItemFragment">
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/et_item_price"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="@+id/et_item_desc"
@@ -31,39 +30,41 @@
         <EditText
             android:id="@+id/et_item_desc"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp"
+            android:layout_height="47dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:ems="10"
             android:inputType="textMultiLine|textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tv_address"
-            app:layout_constraintTop_toBottomOf="@+id/et_item_price" />
+            app:layout_constraintTop_toBottomOf="@+id/et_item_category" />
 
         <ImageView
             android:id="@+id/iv_item_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <TextView
             android:id="@+id/tv_item_name"
-            android:layout_width="84dp"
+            android:layout_width="82dp"
             android:layout_height="28dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/item_name"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_item_name"
             app:layout_constraintStart_toStartOf="@+id/tv_phone" />
@@ -72,8 +73,8 @@
             android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/item_price"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_item_price"
             app:layout_constraintStart_toStartOf="@+id/tv_address" />
@@ -82,52 +83,61 @@
             android:id="@+id/tv_address"
             android:layout_width="84dp"
             android:layout_height="24dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
             android:text="@string/item_description"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_item_desc"
-            app:layout_constraintStart_toStartOf="parent" />
+            tools:layout_editor_absoluteX="28dp" />
 
         <EditText
             android:id="@+id/et_item_name"
-            android:layout_width="0dp"
+            android:layout_width="233dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="@+id/et_item_price"
             app:layout_constraintStart_toStartOf="@+id/et_item_price"
             app:layout_constraintTop_toBottomOf="@+id/iv_item_image" />
 
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_address2"
+            android:layout_width="81dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="category"
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_item_category"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/et_item_category"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/item_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_item_desc" />
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:inputType="textMultiLine|textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/et_item_desc"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_item_desc"
+            app:layout_constraintTop_toBottomOf="@+id/et_item_price" />
 
         <Button
-            android:id="@+id/btn_viewlist"
+            android:id="@+id/btn_add_item"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="52dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/item_viewlist"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/item_add"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_item_desc" />
 

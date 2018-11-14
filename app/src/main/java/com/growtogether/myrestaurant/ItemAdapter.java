@@ -61,7 +61,7 @@ class ItemAdapter extends ArrayAdapter<Item>{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        String urltxt = ApiClient.BASE_URL + items.get(position).getImageurl();
+        String urltxt = ApiClient.BASE_URL + items.get(position).getItemImageUrl();
         Log.e("fragment", urltxt + " <- URL ->");
         Picasso.get().load(urltxt).into(viewHolder.itemImageview);
 

@@ -28,8 +28,10 @@ public interface ApiInterface {
     @GET("restaurant/list.php")
     Call<RestaurantListResponse> getRestaurantList(@Query("user_id") int id);
 
-    // need to search with restraurant serial number
     @GET()
     Call<MenuResponse> getItemsResponse(@Url String stringUrl);
+
+    @POST("item/add.php")
+    Call<ItemAddResponse> addItem (@Body Item item);
 
 }

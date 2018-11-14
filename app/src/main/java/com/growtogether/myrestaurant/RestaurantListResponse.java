@@ -24,7 +24,7 @@ public class RestaurantListResponse {
 
         @SerializedName("serialno")
         @Expose
-        private String serialno;
+        private int serialno;
         @SerializedName("imageurl")
         @Expose
         private String imageurl;
@@ -39,22 +39,22 @@ public class RestaurantListResponse {
         private String phone;
         @SerializedName("latitude")
         @Expose
-        private String latitude;
+        private double latitude;
         @SerializedName("longitude")
         @Expose
-        private String longitude;
+        private double longitude;
         @SerializedName("userid")
         @Expose
-        private String userid;
+        private int userid;
         @SerializedName("created")
         @Expose
         private String created;
 
-        public String getSerialno() {
+        public int getSerialno() {
             return serialno;
         }
 
-        public void setSerialno(String serialno) {
+        public void setSerialno(int serialno) {
             this.serialno = serialno;
         }
 
@@ -90,27 +90,27 @@ public class RestaurantListResponse {
             this.phone = phone;
         }
 
-        public String getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(String latitude) {
+        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 
-        public String getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(String longitude) {
+        public void setLongitude(double longitude) {
             this.longitude = longitude;
         }
 
-        public String getUserid() {
+        public int getUserid() {
             return userid;
         }
 
-        public void setUserid(String userid) {
+        public void setUserid(int userid) {
             this.userid = userid;
         }
 

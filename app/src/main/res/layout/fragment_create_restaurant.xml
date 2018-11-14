@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_res_address" />
+            app:layout_constraintTop_toBottomOf="@+id/et_item_desc" />
 
         <EditText
             android:id="@+id/et_res_latitude"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_res_longitude" />
 
         <EditText
-            android:id="@+id/et_res_phone"
+            android:id="@+id/et_item_price"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
@@ -59,10 +59,10 @@
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_res_name" />
+            app:layout_constraintTop_toBottomOf="@+id/et_item_name" />
 
         <EditText
-            android:id="@+id/et_res_address"
+            android:id="@+id/et_item_desc"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
@@ -75,10 +75,10 @@
             android:inputType="text|textMultiLine|textPostalAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_res_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/et_item_price" />
 
         <ImageView
-            android:id="@+id/iv_res_image"
+            android:id="@+id/iv_item_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -93,7 +93,7 @@
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <EditText
-            android:id="@+id/et_res_name"
+            android:id="@+id/et_item_name"
             android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_res_image" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_image" />
 
         <Button
             android:id="@+id/btn_res_register"

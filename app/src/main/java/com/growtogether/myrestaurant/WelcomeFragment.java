@@ -19,7 +19,7 @@ import android.widget.TextView;
  */
 public class WelcomeFragment extends Fragment {
     TextView msg;
-    Button btnLogout, btnCreateRes, btnResList;
+    Button btnLogout, btnCreateRes, btnResList, btnMap;
     int userId;
     OnLogOutListener onLogOutListener;
 
@@ -27,6 +27,7 @@ public class WelcomeFragment extends Fragment {
         public void logoutPerformed();
         public void switchToCreateRestaurant();
         public void switchToRestaurantList();
+        public void openMap();
     }
 
 
@@ -43,6 +44,7 @@ public class WelcomeFragment extends Fragment {
         msg = view.findViewById(R.id.welcomemsg);
         btnLogout =  view.findViewById(R.id.btnLogout);
         btnCreateRes =  view.findViewById(R.id.btn_res_create);
+        btnMap =  view.findViewById(R.id.btn_map);
         btnResList =  view.findViewById(R.id.btn_res_list);
 
         msg.setText("Welcome "+ MainActivity.prefConfig.readName());
@@ -67,6 +69,13 @@ public class WelcomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 onLogOutListener.switchToRestaurantList();
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLogOutListener.openMap();
             }
         });
 

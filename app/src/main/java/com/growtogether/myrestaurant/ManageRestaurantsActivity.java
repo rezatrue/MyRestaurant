@@ -16,6 +16,7 @@ public class ManageRestaurantsActivity extends AppCompatActivity {
     Button button;
     public static int userSerialNumber;
     public static int restaurantSerialNo;
+    public final static String TAG = "fragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,18 @@ public class ManageRestaurantsActivity extends AppCompatActivity {
         button = findViewById(R.id.btnrestaurant);
 
         Bundle bundle = getIntent().getExtras();
-        userSerialNumber  = bundle.getInt("UserSerialNo", 0);
+        //userSerialNumber  = bundle.getInt("UserSerialNo", 0);
+        userSerialNumber = getIntent().getIntExtra("UserSerialNo", 0);
+
         restaurantSerialNo  = bundle.getInt("RestaurantSerialNo", 0);
         nameTV.setText(bundle.getString("Name"));
         phoneTV.setText(bundle.getString("Phone"));
         addressTV.setText(bundle.getString("Address"));
+
+        Log.e(TAG, "ManageRestaurantActivity -> userSerialNumber : " + userSerialNumber);
+        Log.e(TAG, "ManageRestaurantActivity -> Name : " + bundle.getString("Name"));
+        Log.e(TAG, "ManageRestaurantActivity -> restaurantSerialNo : " + restaurantSerialNo);
+
 
         String urltxt = ApiClient.BASE_URL + bundle.getString("ImageUrl");
         Picasso.get().load(urltxt).into(imageView);

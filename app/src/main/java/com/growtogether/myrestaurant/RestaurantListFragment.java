@@ -22,7 +22,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import com.growtogether.myrestaurant.RestaurantListResponse.Restaurant;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +31,7 @@ public class RestaurantListFragment extends Fragment{
 
     private ListView restaurantListView;
     private RestaurantAdapter restaurantAdapter;
-    private ArrayList<RestaurantListResponse.Restaurant> restaurants;
+    private ArrayList<Restaurant> restaurants;
 
     //Context context;
     Activity activity;
@@ -127,12 +127,15 @@ public class RestaurantListFragment extends Fragment{
         restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Log.i("fragment", "item no : " + restaurants.get(i).getSerialno());
                 Log.i("fragment", "item clicked : ");
                 //RestaurantListResponse.Restaurant restaurant = restaurants.get(i);
 
                 Intent intent = new Intent(activity, ManageRestaurantsActivity.class);
                 intent.putExtra("RestaurantSerialNo", restaurants.get(i).getSerialno());
+                //intent.putExtra("RestaurantSerialNo", restaurants.get(i).getSerialno());
+                //intent.putExtra("UserSerialNo", 12);
                 intent.putExtra("UserSerialNo", restaurants.get(i).getUserid());
                 intent.putExtra("Name", restaurants.get(i).getName());
                 intent.putExtra("Phone", restaurants.get(i).getPhone());

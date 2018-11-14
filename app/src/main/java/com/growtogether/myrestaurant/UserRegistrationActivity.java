@@ -20,11 +20,11 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
-        userName = findViewById(R.id.et_res_name);
+        userName = findViewById(R.id.et_item_name);
         userEmial = findViewById(R.id.et_res_longitude);
-        userPhone = findViewById(R.id.et_res_phone);
-        userAddress = findViewById(R.id.et_res_address);
-        userImage = findViewById(R.id.iv_res_image);
+        userPhone = findViewById(R.id.et_item_price);
+        userAddress = findViewById(R.id.et_item_desc);
+        userImage = findViewById(R.id.iv_item_image);
         btnSubmit = findViewById(R.id.btn_register);
 
         btnSubmit.setOnClickListener(this);

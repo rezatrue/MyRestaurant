@@ -26,7 +26,7 @@ public class ImageProcessor {
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,os);
         byte[] byteArray = os.toByteArray();
         String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        Log.e("data", encodedImage.length() +" <- request base64 length code ->");
+        Log.i("fragment", encodedImage.length() +" <- request base64 length code ->");
         return  encodedImage;
     }
 

@@ -26,9 +26,9 @@ public class MenuResponse {
         @SerializedName("serialno")
         @Expose
         private int serialno;
-        @SerializedName("imageurl")
+        @SerializedName("itemImageUrl")
         @Expose
-        private String imageurl;
+        public String itemImageUrl;
         @SerializedName("name")
         @Expose
         private String name;
@@ -41,25 +41,38 @@ public class MenuResponse {
         @SerializedName("price")
         @Expose
         private double price;
-        @SerializedName("restaurantSerialNo")
+        @SerializedName("restaurantid")
         @Expose
         private int restaurantSerialNo;
         @SerializedName("created")
         @Expose
         private String created;
+        @SerializedName("modified")
+        @Expose
+        private String modified;
 
         public Item() {
         }
 
-        public Item(int serialno, String imageurl, String name, int category, String description, double price, int restaurantSerialNo, String created) {
+        public Item(int serialno, String itemImageUrl, String name, int category, String description, double price, int restaurantSerialNo, String created, String modified) {
             this.serialno = serialno;
-            this.imageurl = imageurl;
+            this.itemImageUrl = itemImageUrl;
             this.name = name;
             this.category = category;
             this.description = description;
             this.price = price;
             this.restaurantSerialNo = restaurantSerialNo;
             this.created = created;
+            this.modified = modified;
+        }
+
+        public Item(String itemImage, String name, int category, String description, double price, int restaurantSerialNo) {
+            this.itemImageUrl = itemImageUrl;
+            this.name = name;
+            this.category = category;
+            this.description = description;
+            this.price = price;
+            this.restaurantSerialNo = restaurantSerialNo;
         }
 
         public int getSerialno() {
@@ -70,12 +83,12 @@ public class MenuResponse {
             this.serialno = serialno;
         }
 
-        public String getImageurl() {
-            return imageurl;
+        public String getItemImageUrl() {
+            return itemImageUrl;
         }
 
-        public void setImageurl(String imageurl) {
-            this.imageurl = imageurl;
+        public void setItemImageUrl(String itemImageUrl) {
+            this.itemImageUrl = itemImageUrl;
         }
 
         public String getName() {
@@ -124,6 +137,14 @@ public class MenuResponse {
 
         public void setCreated(String created) {
             this.created = created;
+        }
+
+        public String getModified() {
+            return modified;
+        }
+
+        public void setModified(String modified) {
+            this.modified = modified;
         }
     }
 
