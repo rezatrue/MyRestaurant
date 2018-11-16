@@ -43,6 +43,14 @@ public class AddItemFragment extends Fragment {
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
 
+
+    OnAddItemActivityListener onAddItemActivityListener;
+
+    public interface OnAddItemActivityListener{
+        void switchToItemListFragment();
+    }
+
+
     public AddItemFragment() {
         // Required empty public constructor
     }
@@ -69,6 +77,7 @@ public class AddItemFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
+        onAddItemActivityListener = (OnAddItemActivityListener) activity;
     }
 
 
@@ -130,6 +139,8 @@ public class AddItemFragment extends Fragment {
                     item_price.setText("");
                     item_description.setText("");
                     item_category.setText("");
+
+                    onAddItemActivityListener.switchToItemListFragment();
                 }
             }
 

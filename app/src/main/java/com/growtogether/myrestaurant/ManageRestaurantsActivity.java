@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ManageRestaurantsActivity extends AppCompatActivity {
+public class ManageRestaurantsActivity extends AppCompatActivity implements ItemListFragment.OnItemListActivityListener, AddItemFragment.OnAddItemActivityListener {
     ImageView imageView;
     TextView nameTV, phoneTV, addressTV;
     Button button;
@@ -49,11 +49,21 @@ public class ManageRestaurantsActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.manage_restaurant_fragment_container, new ItemListFragment())
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
-//        getSupportFragmentManager().beginTransaction().add(R.id.manage_restaurant_fragment_container, new AddItemFragment())
-//                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
     }
 
 
+    @Override
+    public void switchToAddItemFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.manage_restaurant_fragment_container, new AddItemFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
+    }
+
+    @Override
+    public void switchToItemListFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.manage_restaurant_fragment_container, new ItemListFragment())
+                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+    }
 }

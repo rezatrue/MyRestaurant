@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,11 +31,18 @@ import com.growtogether.myrestaurant.MenuResponse.Item;
 public class ItemListFragment extends Fragment {
 
     ListView listView;
+    FloatingActionButton fab;
+
     private ItemAdapter itemAdapter;
     private ArrayList<Item> items;
     Activity activity;
     private ApiInterface apiInterface;
 
+    OnItemListActivityListener onItemListActivityListener;
+
+    public interface OnItemListActivityListener{
+        void switchToAddItemFragment();
+    }
 
     public ItemListFragment() {
         // Required empty public constructor
@@ -45,6 +55,7 @@ public class ItemListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_item_list, container, false);
         listView = view.findViewById(R.id.itemListLV);
+        fab = view.findViewById(R.id.fab);
         return  view ;
     }
 
@@ -52,11 +63,21 @@ public class ItemListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
+        onItemListActivityListener = (OnItemListActivityListener) activity;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                onItemListActivityListener.switchToAddItemFragment();
+            }
+        });
 
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
