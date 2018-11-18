@@ -1,16 +1,22 @@
 package com.growtogether.myrestaurant;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -20,6 +26,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,13 +50,12 @@ import retrofit2.Response;
  */
 public class CreateRestaurantFragment extends Fragment {
 
+    double latitude, longitude;
 
-    double latitude,longitude;
-    //Context context;
     Activity activity;
 
     ImageView imageIV;
-    EditText nameET,phoneET, addressET, longitudeET, latitudeET;
+    EditText nameET, phoneET, addressET, longitudeET, latitudeET;
     Button btn;
     boolean userEdit = false;
 
@@ -55,7 +68,10 @@ public class CreateRestaurantFragment extends Fragment {
 
     OnRestaurantCreateListener onRestaurantCreateListener;
 
-    public interface OnRestaurantCreateListener{
+    private FusedLocationProviderClient mFusedLocationClient;
+
+
+    public interface OnRestaurantCreateListener {
         public void switchToRestaurantList();
     }
 
@@ -77,14 +93,14 @@ public class CreateRestaurantFragment extends Fragment {
         longitudeET = view.findViewById(R.id.et_res_longitude);
         latitudeET = view.findViewById(R.id.et_res_latitude);
         btn = view.findViewById(R.id.btn_res_register);
-        if(userEdit)
+        if (userEdit)
             btn.setText("Edit");
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "button clicked ");
-                if(!userEdit) createRestaurant();
+                if (!userEdit) createRestaurant();
                 else ; //do something;
             }
         });
@@ -97,10 +113,10 @@ public class CreateRestaurantFragment extends Fragment {
                 setPic();
             }
         });
+        Log.i(TAG, "Lat :-> " + latitude  + " Lng:-> "+ longitude);
 
         return view;
     }
-
 
 
     @Override
@@ -109,15 +125,40 @@ public class CreateRestaurantFragment extends Fragment {
 
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
+
+        latitudeET.setText(String.valueOf(latitude));
+        longitudeET.setText(String.valueOf(longitude));
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //this.context = context;
         this.activity = (Activity) context;
         onRestaurantCreateListener = (OnRestaurantCreateListener) activity;
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(activity, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations, this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                            Log.i(TAG, "Lat :" + location.getLatitude()  + " Lng: "+ location.getLongitude());
+                        }else{
+                            Log.i(TAG, "Lat : null Lng: null");
+
+                        }
+                    }
+                });
+
     }
 
 
