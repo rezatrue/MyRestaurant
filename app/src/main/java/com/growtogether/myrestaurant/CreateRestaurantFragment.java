@@ -110,9 +110,38 @@ public class CreateRestaurantFragment extends Fragment {
             public void onClick(View view) {
                 Log.i(TAG, "image clicked ");
                 dispatchTakePictureIntent();
-                setPic();
+                //setPic();
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+                imageIV.setImageBitmap(myBitmap);
+
+                Log.i(TAG, "image :-> " + myBitmap.toString());
+
             }
         });
+
+        longitudeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    latitudeET.setText(String.valueOf(latitude));
+                    longitudeET.setText(String.valueOf(longitude));
+                }
+
+            }
+        });
+
+        latitudeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    latitudeET.setText(String.valueOf(latitude));
+                    longitudeET.setText(String.valueOf(longitude));
+                }
+
+            }
+        });
+
         Log.i(TAG, "Lat :-> " + latitude  + " Lng:-> "+ longitude);
 
         return view;

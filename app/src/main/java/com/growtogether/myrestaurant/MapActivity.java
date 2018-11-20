@@ -54,6 +54,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //mMap.getUiSettings().setMyLocationButtonEnabled(false);  // back is my location button
         mMap.getUiSettings().setCompassEnabled(true);
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+            Log.d(TAG, "LatLng : " + latLng.latitude + ", lng: " + latLng.longitude );
+            }
+        });
+
+
         /*
         LatLng iitDuCoordinate = new LatLng(23.7291, 90.3983);
         mMap.addMarker(new MarkerOptions().position(iitDuCoordinate).title("IIT, DU"));

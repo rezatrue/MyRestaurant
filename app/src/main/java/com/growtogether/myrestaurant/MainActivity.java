@@ -31,11 +31,10 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
 
         if (prefConfig.readLoginStatus()) {
             getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new WelcomeFragment())
-                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         }else {
             getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new LoginFragment())
-                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         }
     }
 

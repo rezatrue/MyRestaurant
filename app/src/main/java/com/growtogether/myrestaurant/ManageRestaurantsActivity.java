@@ -47,7 +47,7 @@ public class ManageRestaurantsActivity extends AppCompatActivity implements Item
         Picasso.get().load(urltxt).into(imageView);
 
         getSupportFragmentManager().beginTransaction().add(R.id.manage_restaurant_fragment_container, new ItemListFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
 
     }

@@ -22,10 +22,10 @@ public class RestaurantActivity extends AppCompatActivity
         Toast.makeText(this, "User ID : "+ userid + " switchTo : " + switchTo, Toast.LENGTH_LONG).show();
         if(switchTo == 0)
         getSupportFragmentManager().beginTransaction().add(R.id.restaurant_fragment_container, new RestaurantListFragment())
-                    .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         if(switchTo == 1)
         getSupportFragmentManager().beginTransaction().add(R.id.restaurant_fragment_container, new CreateRestaurantFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
     }
 
