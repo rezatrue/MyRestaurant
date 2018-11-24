@@ -8,9 +8,8 @@
     tools:context=".CreateRestaurantFragment">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/et_res_longitude"
@@ -80,7 +79,7 @@
         <ImageView
             android:id="@+id/iv_item_image"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="28dp"

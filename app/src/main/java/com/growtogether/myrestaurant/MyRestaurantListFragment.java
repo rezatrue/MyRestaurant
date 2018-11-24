@@ -27,7 +27,7 @@ import com.growtogether.myrestaurant.RestaurantListResponse.Restaurant;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestaurantListFragment extends Fragment{
+public class MyRestaurantListFragment extends Fragment{
 
     private ListView restaurantListView;
     private RestaurantAdapter restaurantAdapter;
@@ -46,7 +46,7 @@ public class RestaurantListFragment extends Fragment{
         public void switchToEditRestaurant();
     }
 
-    public RestaurantListFragment() {
+    public MyRestaurantListFragment() {
         // Required empty public constructor
     }
 

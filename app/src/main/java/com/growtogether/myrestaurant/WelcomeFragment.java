@@ -19,14 +19,16 @@ import android.widget.TextView;
  */
 public class WelcomeFragment extends Fragment {
     TextView msg;
-    Button btnLogout, btnCreateRes, btnResList, btnMap;
+    Button btnLogout, btnCreateRes, btnMyResList, btnMap;
+    Button searchRes;
     int userId;
     OnLogOutListener onLogOutListener;
 
     public interface OnLogOutListener{
         public void logoutPerformed();
         public void switchToCreateRestaurant();
-        public void switchToRestaurantList();
+        public void switchToMyRestaurantList();
+        public void switchToAllRestaurantList();
         public void openMap();
     }
 
@@ -45,7 +47,8 @@ public class WelcomeFragment extends Fragment {
         btnLogout =  view.findViewById(R.id.btnLogout);
         btnCreateRes =  view.findViewById(R.id.btn_res_create);
         btnMap =  view.findViewById(R.id.btn_map);
-        btnResList =  view.findViewById(R.id.btn_res_list);
+        btnMyResList =  view.findViewById(R.id.btn_res_manage);
+        searchRes =  view.findViewById(R.id.btn_res_search);
 
         msg.setText("Welcome "+ MainActivity.prefConfig.readName());
 
@@ -58,6 +61,13 @@ public class WelcomeFragment extends Fragment {
             }
         });
 
+        searchRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLogOutListener.switchToAllRestaurantList();
+            }
+        });
+
         btnCreateRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,10 +75,10 @@ public class WelcomeFragment extends Fragment {
             }
         });
 
-        btnResList.setOnClickListener(new View.OnClickListener() {
+        btnMyResList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onLogOutListener.switchToRestaurantList();
+                onLogOutListener.switchToMyRestaurantList();
             }
         });
 

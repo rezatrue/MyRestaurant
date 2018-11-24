@@ -32,6 +32,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class AddItemFragment extends Fragment {
 
     EditText item_name, item_price, item_description, item_category;
@@ -102,7 +104,6 @@ public class AddItemFragment extends Fragment {
             public void onClick(View view) {
                 Log.i(TAG, "image clicked ");
                 dispatchTakePictureIntent();
-                setPic();
             }
         });
 
@@ -153,6 +154,15 @@ public class AddItemFragment extends Fragment {
 
     }
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            galleryAddPic();
+            setPic();
+        }
+    }
 
 
     private void dispatchTakePictureIntent() {

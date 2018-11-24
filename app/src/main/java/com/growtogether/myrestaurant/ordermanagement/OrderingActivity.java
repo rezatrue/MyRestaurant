@@ -1,4 +1,4 @@
-package com.growtogether.myrestaurant;
+package com.growtogether.myrestaurant.ordermanagement;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,15 +14,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.growtogether.myrestaurant.ApiClient;
+import com.growtogether.myrestaurant.ItemListFragment;
+import com.growtogether.myrestaurant.OrdersListFragment;
+import com.growtogether.myrestaurant.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageRestaurantsActivity extends AppCompatActivity implements ItemListFragment.OnItemListActivityListener, AddItemFragment.OnAddItemActivityListener {
+public class OrderingActivity extends AppCompatActivity {
     ImageView imageView;
     TextView nameTV, phoneTV, addressTV;
-    Button button;
     public static int userSerialNumber;
     public static int restaurantSerialNo;
     public final static String TAG = "fragment";
@@ -34,7 +37,7 @@ public class ManageRestaurantsActivity extends AppCompatActivity implements Item
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_restaurants);
+        setContentView(R.layout.activity_ordering);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,14 +51,12 @@ public class ManageRestaurantsActivity extends AppCompatActivity implements Item
         tabLayout.setupWithViewPager(viewPager);
 
 
-        imageView = findViewById(R.id.ivrestaurant);
-        nameTV = findViewById(R.id.tvrname);
-        phoneTV = findViewById(R.id.tvrphone);
-        addressTV = findViewById(R.id.tvraddress);
-        button = findViewById(R.id.btnrestaurant);
+        imageView = findViewById(R.id.ivorestaurant);
+        nameTV = findViewById(R.id.tvresname);
+        phoneTV = findViewById(R.id.tvresphone);
+        addressTV = findViewById(R.id.tvresaddress);
 
         Bundle bundle = getIntent().getExtras();
-        //userSerialNumber  = bundle.getInt("UserSerialNo", 0);
         userSerialNumber = getIntent().getIntExtra("UserSerialNo", 0);
 
         restaurantSerialNo  = bundle.getInt("RestaurantSerialNo", 0);
@@ -63,25 +64,19 @@ public class ManageRestaurantsActivity extends AppCompatActivity implements Item
         phoneTV.setText(bundle.getString("Phone"));
         addressTV.setText(bundle.getString("Address"));
 
-        Log.e(TAG, "ManageRestaurantActivity -> userSerialNumber : " + userSerialNumber);
-        Log.e(TAG, "ManageRestaurantActivity -> Name : " + bundle.getString("Name"));
-        Log.e(TAG, "ManageRestaurantActivity -> restaurantSerialNo : " + restaurantSerialNo);
-
+        Log.e(TAG, "OrderingActivity -> userSerialNumber : " + userSerialNumber);
+        Log.e(TAG, "OrderingActivity -> Name : " + bundle.getString("Name"));
+        Log.e(TAG, "OrderingActivity -> restaurantSerialNo : " + restaurantSerialNo);
 
         String urltxt = ApiClient.BASE_URL + bundle.getString("ImageUrl");
         Picasso.get().load(urltxt).into(imageView);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.viewpager_fragment_container, new ItemListFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-
-
     }
-
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ItemListFragment(), "Menu");
-        adapter.addFragment(new OrdersListFragment(), "Orders");
+        adapter.addFragment(new MenuFragment(), "Menu");
+        adapter.addFragment(new MyOrderListFragment(), "My List");
         viewPager.setAdapter(adapter);
     }
 
@@ -114,15 +109,7 @@ public class ManageRestaurantsActivity extends AppCompatActivity implements Item
         }
     }
 
-    @Override
-    public void switchToAddItemFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.viewpager_fragment_container, new AddItemFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-    }
 
-    @Override
-    public void switchToItemListFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.viewpager_fragment_container, new ItemListFragment())
-                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-    }
+
+
 }

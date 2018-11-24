@@ -44,6 +44,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -110,12 +112,10 @@ public class CreateRestaurantFragment extends Fragment {
             public void onClick(View view) {
                 Log.i(TAG, "image clicked ");
                 dispatchTakePictureIntent();
-                //setPic();
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-                imageIV.setImageBitmap(myBitmap);
-
-                Log.i(TAG, "image :-> " + myBitmap.toString());
+//                Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+//                imageIV.setImageBitmap(myBitmap);
+//                Log.i(TAG, "image :-> " + myBitmap.toString());
 
             }
         });
@@ -143,7 +143,6 @@ public class CreateRestaurantFragment extends Fragment {
         });
 
         Log.i(TAG, "Lat :-> " + latitude  + " Lng:-> "+ longitude);
-
         return view;
     }
 
@@ -155,8 +154,6 @@ public class CreateRestaurantFragment extends Fragment {
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
 
-        latitudeET.setText(String.valueOf(latitude));
-        longitudeET.setText(String.valueOf(longitude));
     }
 
 
@@ -252,7 +249,16 @@ public class CreateRestaurantFragment extends Fragment {
         }
     }
 
-    private File createImageFile() throws IOException {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            galleryAddPic();
+            setPic();
+        }
+    }
+   private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";

@@ -45,7 +45,6 @@ public class ItemListFragment extends Fragment {
     }
 
     public ItemListFragment() {
-        // Required empty public constructor
         items = new ArrayList<>();
     }
 

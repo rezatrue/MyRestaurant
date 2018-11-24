@@ -23,7 +23,7 @@ public interface ApiInterface {
     Call<RestaurantResponse> getRestaurantResponse(@Body Restaurant restaurant);
 
     @GET("restaurant/list.php")
-    Call<RestaurantListResponse> getRestaurantList();
+    Call<RestaurantListResponse> getAllRestaurantList();
 
     @GET("restaurant/list.php")
     Call<RestaurantListResponse> getRestaurantList(@Query("user_id") int id);

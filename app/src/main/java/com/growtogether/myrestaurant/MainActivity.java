@@ -72,10 +72,18 @@ public class MainActivity extends AppCompatActivity  implements LoginFragment.On
     }
 
     @Override
-    public void switchToRestaurantList() {
+    public void switchToMyRestaurantList() {
         Intent intent = new Intent(this, RestaurantActivity.class);
         intent.putExtra(USERID, prefConfig.readUserId());
         intent.putExtra(SWITCH, 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public void switchToAllRestaurantList() {
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        intent.putExtra(USERID, prefConfig.readUserId());
+        intent.putExtra(SWITCH, 2);
         startActivity(intent);
     }
 

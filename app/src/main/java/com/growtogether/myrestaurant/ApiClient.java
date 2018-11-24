@@ -10,9 +10,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
 
-    //public static final String BASE_URL = "http://10.100.101.101/api/";
+    //public static final String BASE_URL = "http://10.100.101.39/api/";
+    public static final String BASE_URL = "http://192.168.0.103/api/";
     //public static final String BASE_URL = "http://192.168.0.100/api/";
-    public static final String BASE_URL = "http://192.168.40.102/api/";
 
     private static Retrofit retrofit = null;
     private static ApiInterface apiInterface = null;
