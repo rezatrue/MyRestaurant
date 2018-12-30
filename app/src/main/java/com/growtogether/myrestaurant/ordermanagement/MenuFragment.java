@@ -14,10 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.growtogether.myrestaurant.ApiClient;
-import com.growtogether.myrestaurant.ApiInterface;
-import com.growtogether.myrestaurant.adapters.ItemAdapter;
-import com.growtogether.myrestaurant.MenuResponse;
+import com.growtogether.myrestaurant.utils.ApiClient;
+import com.growtogether.myrestaurant.utils.ApiInterface;
+import com.growtogether.myrestaurant.adapters.MenuAdapter;
+import com.growtogether.myrestaurant.pojo.MenuResponse;
 import com.growtogether.myrestaurant.R;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class MenuFragment extends Fragment {
     ListView listView;
     TextView textView;
-    private ItemAdapter itemAdapter;
+    private MenuAdapter menuAdapter;
     private ArrayList<MenuResponse.Item> items;
     Activity activity;
     private ApiInterface apiInterface;
@@ -41,7 +41,6 @@ public class MenuFragment extends Fragment {
     public MenuFragment() {
         items = new ArrayList<>();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,8 +80,8 @@ public class MenuFragment extends Fragment {
                         MenuResponse menuResponse = response.body();
                         items = menuResponse.getItems();
                         if(items != null) {
-                            itemAdapter = new ItemAdapter(activity, items);
-                            listView.setAdapter(itemAdapter);
+                            menuAdapter = new MenuAdapter(activity, items);
+                            listView.setAdapter(menuAdapter);
                         }else {
                             listView.setVisibility(View.GONE);
                             textView.setVisibility(View.VISIBLE);
@@ -101,5 +100,10 @@ public class MenuFragment extends Fragment {
             textView.setVisibility(View.VISIBLE);
         }
 
+
+
     }
+
+
+
 }

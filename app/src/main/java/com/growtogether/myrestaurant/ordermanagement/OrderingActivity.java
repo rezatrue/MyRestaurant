@@ -4,31 +4,31 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.growtogether.myrestaurant.ApiClient;
-import com.growtogether.myrestaurant.ItemListFragment;
-import com.growtogether.myrestaurant.OrdersListFragment;
+import com.growtogether.myrestaurant.utils.ApiClient;
+import com.growtogether.myrestaurant.pojo.MenuResponse;
 import com.growtogether.myrestaurant.R;
+import com.growtogether.myrestaurant.adapters.MenuAdapter;
+import com.growtogether.myrestaurant.pojo.OrderItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderingActivity extends AppCompatActivity {
+public class OrderingActivity extends AppCompatActivity implements MenuAdapter.OnAdapterItemListener{
     ImageView imageView;
     TextView nameTV, phoneTV, addressTV;
     public static int userSerialNumber;
     public static int restaurantSerialNo;
     public final static String TAG = "fragment";
+    public static ArrayList<OrderItem> selectedItems;
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -38,6 +38,8 @@ public class OrderingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering);
+
+        selectedItems = new ArrayList<>();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,10 +59,11 @@ public class OrderingActivity extends AppCompatActivity {
         addressTV = findViewById(R.id.tvresaddress);
 
         Bundle bundle = getIntent().getExtras();
-        userSerialNumber = getIntent().getIntExtra("UserSerialNo", 0);
+        userSerialNumber = getIntent().getIntExtra("CustomerSerialNo", 0);
 
         restaurantSerialNo  = bundle.getInt("RestaurantSerialNo", 0);
-        nameTV.setText(bundle.getString("Name"));
+        String type = (" [ " + bundle.getString("Type") + " ]");
+        nameTV.setText(bundle.getString("Name") + type);
         phoneTV.setText(bundle.getString("Phone"));
         addressTV.setText(bundle.getString("Address"));
 
@@ -78,6 +81,39 @@ public class OrderingActivity extends AppCompatActivity {
         adapter.addFragment(new MenuFragment(), "Menu");
         adapter.addFragment(new MyOrderListFragment(), "My List");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void addItemToOrderList(MenuResponse.Item item) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItemName(item.getName());
+        orderItem.setItemSerialNo(item.getSerialno());
+        orderItem.setItemPrice(item.getPrice());
+        orderItem.setItemQuantity(1);
+        selectedItems.add(orderItem);
+    }
+
+    @Override
+    public void addItemCountOnList(MenuResponse.Item item) {
+        int num = item.getSerialno();
+        for(int i = 0; i < selectedItems.size(); i++){
+            if(selectedItems.get(i).getItemSerialNo() == num)
+                selectedItems.get(i).setItemQuantity(selectedItems.get(i).getItemQuantity()+1);
+        }
+    }
+
+    @Override
+    public void decreaseItemCountOnList(MenuResponse.Item item) {
+        int num = item.getSerialno();
+        for(int i = 0; i < selectedItems.size(); i++){
+            if(selectedItems.get(i).getItemSerialNo() == num) {
+                int count = selectedItems.get(i).getItemQuantity();
+                if (count == 1)
+                    selectedItems.remove(i);
+                else if (count > 1)
+                    selectedItems.get(i).setItemQuantity(count - 1);
+            }
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

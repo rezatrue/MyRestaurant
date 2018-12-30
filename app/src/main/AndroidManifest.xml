@@ -40,17 +40,20 @@
         </provider>
 
         <activity android:name=".UserRegistrationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".starter.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantActivity" />
-        <activity android:name=".ManageRestaurantsActivity" />
+        <activity android:name=".restaurant.RestaurantActivity" />
+        <activity android:name=".managerestaurant.ManageRestaurantsActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".ordermanagement.OrderingActivity" />
+        <activity android:name=".ordermanagement.MyOrdersActivity" />
+        <activity android:name=".ordermanagement.PostOrderActivity" />
+        <activity android:name=".restaurant.AddItemActivity"></activity>
     </application>
 
 </manifest>

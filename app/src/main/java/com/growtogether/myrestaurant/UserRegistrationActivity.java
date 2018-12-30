@@ -23,7 +23,7 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         userName = findViewById(R.id.et_item_name);
         userEmial = findViewById(R.id.et_res_longitude);
         userPhone = findViewById(R.id.et_item_price);
-        userAddress = findViewById(R.id.et_item_desc);
+        userAddress = findViewById(R.id.et_item_description);
         userImage = findViewById(R.id.iv_item_image);
         btnSubmit = findViewById(R.id.btn_register);
 

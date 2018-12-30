@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRestaurantFragment">
+    tools:context=".restaurant.CreateRestaurantFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_item_desc" />
+            app:layout_constraintTop_toBottomOf="@+id/et_item_description" />
 
         <EditText
             android:id="@+id/et_res_latitude"
@@ -61,35 +61,36 @@
             app:layout_constraintTop_toBottomOf="@+id/et_item_name" />
 
         <EditText
-            android:id="@+id/et_item_desc"
+            android:id="@+id/et_item_description"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
             android:hint="Address"
             android:inputType="text|textMultiLine|textPostalAddress"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_item_price" />
+            app:layout_constraintTop_toBottomOf="@+id/tv5" />
 
         <ImageView
             android:id="@+id/iv_item_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="79dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <EditText
             android:id="@+id/et_item_name"
@@ -97,7 +98,7 @@
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
@@ -122,6 +123,25 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_res_latitude" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="78dp"
+            android:layout_height="0dp"
+            android:ems="10"
+            android:gravity="center"
+            android:text="Type"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_type"
+            app:layout_constraintStart_toStartOf="@+id/et_item_price"
+            app:layout_constraintTop_toTopOf="@+id/spinner_type" />
+
+        <Spinner
+            android:id="@+id/spinner_type"
+            android:layout_width="129dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/et_item_price"
+            app:layout_constraintTop_toBottomOf="@+id/et_item_price" />
 
 
     </android.support.constraint.ConstraintLayout>

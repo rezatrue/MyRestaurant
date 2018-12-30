@@ -2,6 +2,8 @@ package com.growtogether.myrestaurant;
 /*
  * Design & Developed by Ali Ahmed Reza (Iron Man)
  */
+import com.growtogether.myrestaurant.pojo.MenuResponse;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

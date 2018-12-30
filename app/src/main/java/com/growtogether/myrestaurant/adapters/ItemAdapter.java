@@ -2,7 +2,6 @@ package com.growtogether.myrestaurant.adapters;
 /*
  * Design & Developed by Ali Ahmed Reza (Iron Man)
  */
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,12 +14,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.growtogether.myrestaurant.ApiClient;
-import com.growtogether.myrestaurant.MenuResponse.Item;
+import java.util.ArrayList;
+
+import com.growtogether.myrestaurant.utils.ApiClient;
+import com.growtogether.myrestaurant.pojo.MenuResponse.Item;
 import com.growtogether.myrestaurant.R;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class ItemAdapter extends ArrayAdapter<Item>{
     private Context context;
@@ -37,7 +36,6 @@ public class ItemAdapter extends ArrayAdapter<Item>{
         TextView itemName;
         TextView itemPrice;
         TextView itemDescription;
-        Button btn;
     }
 
     @NonNull
@@ -53,7 +51,6 @@ public class ItemAdapter extends ArrayAdapter<Item>{
             viewHolder.itemImageview = convertView.findViewById(R.id.item_image);
             viewHolder.itemPrice = convertView.findViewById(R.id.item_price);
             viewHolder.itemDescription = convertView.findViewById(R.id.item_description);
-            viewHolder.btn = convertView.findViewById(R.id.btn_item_edit);
             convertView.setTag(viewHolder);
             Log.i("fragment", "adepter 0" );
 

@@ -3,12 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersListFragment">
+    tools:context=".managerestaurant.RestaurantsOrdersListFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <ListView
+        android:id="@+id/orderListLV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
     <TextView
+        android:id="@+id/orderMsgTV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="NO ORDER FOUND"
+        android:gravity="center"
+        android:visibility="gone"
+        />
 
 </FrameLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemListFragment">
+    tools:context=".managerestaurant.ItemListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
@@ -12,6 +12,14 @@
         android:layout_height="match_parent">
 
     </ListView>
+    <TextView
+        android:id="@+id/itemMsgTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="NO ITEM FOUND"
+        android:gravity="center"
+        android:visibility="gone"
+        />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -19,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
+        tools:src="@android:drawable/ic_input_add" />
 
 </FrameLayout>
