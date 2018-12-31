@@ -5,15 +5,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-//import android.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.growtogether.myrestaurant.R;
+import com.growtogether.myrestaurant.adapters.OptionAdapter;
+import com.growtogether.myrestaurant.pojo.Option;
+
+import java.util.ArrayList;
 
 
 /**
@@ -21,9 +26,11 @@ import com.growtogether.myrestaurant.R;
  */
 public class WelcomeFragment extends Fragment {
     TextView msg;
-    Button btnLogout, btnCreateRes, btnMyResList, btnMap, btnMyOrders;
-    Button searchRes;
+    private ArrayList<Option> options;
+    private RecyclerView recyclerView;
+    private OptionAdapter optionAdapter;
     int userId;
+    Activity activity;
     WelcomeListener welcomeListener;
 
     public interface WelcomeListener {
@@ -34,7 +41,6 @@ public class WelcomeFragment extends Fragment {
         public void switchToCheckOrdersStatus();
         public void openMap();
     }
-
 
     public WelcomeFragment() {
         // Required empty public constructor
@@ -47,69 +53,50 @@ public class WelcomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
         msg = view.findViewById(R.id.welcomemsg);
-        btnLogout =  view.findViewById(R.id.btnLogout);
-        btnCreateRes =  view.findViewById(R.id.btn_res_create);
-        btnMap =  view.findViewById(R.id.btn_map);
-        btnMyOrders =  view.findViewById(R.id.btn_my_orders);
-        btnMyResList =  view.findViewById(R.id.btn_res_manage);
-        searchRes =  view.findViewById(R.id.btn_res_search);
-
         msg.setText("Welcome "+ MainActivity.prefConfig.readName());
-
 //        if((userId = MainActivity.prefConfig.readUserId()) != 0) // need to concentrate later
+        createOptions();
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        recyclerView = view.findViewById(R.id.optionRecyclerView);
+        optionAdapter = new OptionAdapter(activity,options);
+        GridLayoutManager glm = new GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false);
+
+        recyclerView.setLayoutManager(glm);
+        recyclerView.setAdapter(optionAdapter);
+
+        optionAdapter.setOnItemClickListener(new OptionAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                welcomeListener.logoutPerformed();
+            public void onItemClick(int position) {
+                if(position == 0 ) welcomeListener.switchToCreateRestaurant();
+                if(position == 1 ) welcomeListener.switchToMyRestaurantList();
+                if(position == 2 ) welcomeListener.switchToAllRestaurantList();
+                if(position == 3 ) welcomeListener.switchToCheckOrdersStatus();
+                if(position == 4 ) welcomeListener.openMap();
+                if(position == 5 ) welcomeListener.logoutPerformed();
+                Log.i("fragemnt", "Recycle view position "+ position);
             }
         });
 
-        searchRes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeListener.switchToAllRestaurantList();
-            }
-        });
-
-        btnCreateRes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeListener.switchToCreateRestaurant();
-            }
-        });
-
-        btnMyResList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeListener.switchToMyRestaurantList();
-            }
-        });
-
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeListener.openMap();
-            }
-        });
-
-        btnMyOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeListener.switchToCheckOrdersStatus();
-            }
-        });
-        
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Activity activity = (Activity) context;
+        this.activity = (Activity) context;
         welcomeListener = (WelcomeListener) activity;
     }
 
+    private void createOptions() {
+        options = new ArrayList<>();
+        options.add(new Option(R.drawable.ic_business_black_24dp,"Create A Restaurant"));
+        options.add(new Option(R.drawable.ic_content_paste_black_24dp,"Manage Restautants"));
+        options.add(new Option(R.drawable.ic_search_black_24dp,"Search Restaurant"));
+        options.add(new Option(R.drawable.ic_format_list_numbered_black_24dp,"Check Orders Status"));
+        options.add(new Option(R.drawable.ic_my_location_black_24dp,"Map"));
+        options.add(new Option(R.drawable.ic_phonelink_erase_black_24dp,"Logout"));
+
+    }
 
 
 }

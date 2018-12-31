@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,7 +79,7 @@ public class AllRestaurantListFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getRestaurantList("ALL");
+        getRestaurantList("ALL",RestaurantActivity.userid);
         getListOfTypes();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,7 +98,7 @@ public class AllRestaurantListFragment extends Fragment{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getRestaurantList(type);
+                getRestaurantList(type,RestaurantActivity.userid);
             }
         });
 
@@ -108,8 +109,6 @@ public class AllRestaurantListFragment extends Fragment{
                 onAllRestaurantListItemListener.switchToOrderManageRestaurant(restaurants.get(i));
             }
         });
-
-
 
     }
 
@@ -122,13 +121,10 @@ public class AllRestaurantListFragment extends Fragment{
 
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
-
-
-
     }
 
-    private void getRestaurantList(String type){
-        Call<RestaurantListResponse> restaurantListResponseCall = apiInterface.getTypeRestaurantList(type);
+    private void getRestaurantList(String type, int id){
+        Call<RestaurantListResponse> restaurantListResponseCall = apiInterface.getTypeRestaurantList(type, id);
 
         restaurantListResponseCall.enqueue(new Callback<RestaurantListResponse>() {
             @Override

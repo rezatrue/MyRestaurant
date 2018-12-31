@@ -27,7 +27,7 @@ public class RestaurantsOrdersListAdapter extends ArrayAdapter<Order> {
     }
 
     class ViewHolder{
-        TextView orderId, orderDate, orderAddress, orderStatus;
+        TextView orderId, orderDate, orderStatus;
     }
 
     @NonNull
@@ -43,7 +43,6 @@ public class RestaurantsOrdersListAdapter extends ArrayAdapter<Order> {
 
             viewHolder.orderId = convertView.findViewById(R.id.tv_order_id);
             viewHolder.orderDate = convertView.findViewById(R.id.tv_order_date);
-            viewHolder.orderAddress = convertView.findViewById(R.id.tv_res_name);
             viewHolder.orderStatus = convertView.findViewById(R.id.tv_order_status);
             convertView.setTag(viewHolder);
             Log.i("fragment", "adepter 0" );
@@ -55,7 +54,6 @@ public class RestaurantsOrdersListAdapter extends ArrayAdapter<Order> {
 
         viewHolder.orderId.setText(list.get(position).getOrderID()+"");
         viewHolder.orderDate.setText(list.get(position).getOrderDate()+"");
-        viewHolder.orderAddress.setText(list.get(position).getDeliverAddress()+"");
         int num = list.get(position).getOrderStatus();
         if(num < -1) viewHolder.orderStatus.setText("Unviewed");
         else viewHolder.orderStatus.setText(ManageRestaurantsActivity.options[num + 1]);

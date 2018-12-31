@@ -46,8 +46,11 @@ public interface ApiInterface {
     @GET("restaurant/list.php")
     Call<RestaurantListResponse> getAllRestaurantList();
 
+//    @GET("restaurant/list.php")
+//    Call<RestaurantListResponse> getTypeRestaurantList(@Query("res_type") String type);
+
     @GET("restaurant/list.php")
-    Call<RestaurantListResponse> getTypeRestaurantList(@Query("res_type") String type);
+    Call<RestaurantListResponse> getTypeRestaurantList(@Query("res_type") String type, @Query("not_user_id") int id);
 
     @GET("restaurant/list.php")
     Call<RestaurantListResponse> getRestaurantList(@Query("user_id") int id);

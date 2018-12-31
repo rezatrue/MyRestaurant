@@ -13,9 +13,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/item_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,26 +56,24 @@
 
     <ImageButton
         android:id="@+id/ibtn_add"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/item_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_image"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toTopOf="@+id/ibtn_minus"
+        app:srcCompat="@drawable/ic_add_circle_outline_black_24dp"
+        tools:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
 
     <ImageButton
         android:id="@+id/ibtn_minus"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toStartOf="@+id/ibtn_add"
-        app:layout_constraintTop_toTopOf="@+id/ibtn_add"
-        app:srcCompat="@android:drawable/ic_input_add"
-        tools:srcCompat="@android:drawable/button_onoff_indicator_on" />
+        app:layout_constraintTop_toTopOf="@+id/item_name"
+        app:srcCompat="@drawable/ic_remove_circle_outline_black_24dp"
+        tools:srcCompat="@drawable/ic_remove_circle_outline_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class MyRestaurantListFragment extends Fragment{
     private ListView restaurantListView;
     private RestaurantAdapter restaurantAdapter;
     private ArrayList<Restaurant> restaurants;
-
+    ConstraintLayout constraintLayout;
     //Context context;
     Activity activity;
 
@@ -61,6 +62,8 @@ public class MyRestaurantListFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
         restaurantListView = view.findViewById(R.id.res_list_view);
         textView = view.findViewById(R.id.resMsgTV);
+        constraintLayout = view.findViewById(R.id.search_tab);
+        constraintLayout.setVisibility(View.GONE);
         return view;
     }
 
