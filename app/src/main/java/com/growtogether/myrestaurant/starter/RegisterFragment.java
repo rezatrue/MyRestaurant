@@ -18,6 +18,9 @@ import com.growtogether.myrestaurant.R;
 import com.growtogether.myrestaurant.pojo.User;
 import com.growtogether.myrestaurant.pojo.UserResponse;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +50,6 @@ public class RegisterFragment extends Fragment {
         phoneET =  view.findViewById(R.id.etrphone);
         passwardET =  view.findViewById(R.id.etrpassword);
         registerBtn =  view.findViewById(R.id.registerBtn);
-
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,13 +66,63 @@ public class RegisterFragment extends Fragment {
 
         ApiClient apiClient = new ApiClient();
         apiInterface = apiClient.getApiInterface();
+
+
+        phoneET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(R.id.etrphone == view.getId() && !b){
+                    String phoneText = phoneET.getText().toString();
+                    if(!(phoneText.length() == 11) || !phoneText.startsWith("01")) {
+                        Toast.makeText(getContext(), "Invalid Mobile Number", Toast.LENGTH_SHORT).show();
+                        phoneET.setText("");
+                    }
+                }
+
+            }
+        });
+
+        emailET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(R.id.etremailaddress == view.getId() && !b){
+                    String phoneText = emailET.getText().toString();
+                    if(!isEmailValid(phoneText)) {
+                        Toast.makeText(getContext(), "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                        emailET.setText("");
+                    }
+                }
+
+            }
+        });
     }
 
+    public boolean isEmailValid(String email) {
+        boolean isValid = false;
+
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+
     public void performRegistration(){
+
         String name = nameET.getText().toString();
         String email = emailET.getText().toString();
         String phone = phoneET.getText().toString();
         String password = passwardET.getText().toString();
+
+        if(name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()){
+            Toast.makeText(getContext(), "Insufficient information", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         User user = new User();
         user.setUserName(name);
@@ -81,7 +133,6 @@ public class RegisterFragment extends Fragment {
         Log.i(TAG, "User Name : "+user.getUserName());
         Log.i(TAG, "User Email : "+user.getUserEmail());
         Log.i(TAG, "User Phone : "+user.getUserPhone());
-
 
         Call<UserResponse> registerResponse = apiInterface.getRegisterResponse(user);
 
