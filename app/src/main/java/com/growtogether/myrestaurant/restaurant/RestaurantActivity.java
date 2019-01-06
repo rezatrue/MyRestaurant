@@ -47,11 +47,13 @@ public class RestaurantActivity extends AppCompatActivity
             bundle.putInt("userid", intent.getIntExtra("uid", 0) );
             Log.i("fragment", "c RA uid: " + intent.getIntExtra("uid", 0));
 
-            bundle.putInt("cphone", intent.getIntExtra("cphone", 0) );
-            Log.i("fragment", "c RA phone: " + intent.getIntExtra("cphone", 0));
+            int phone = intent.getIntExtra("cphone", 0);
+                    Log.i("fragment", "c RA phone-: " + phone);
+            bundle.putInt("cphone", phone);
+
 
             bundle.putString("cname", intent.getStringExtra("cname") );
-            Log.i("fragment", "c RA name: " + intent.getIntExtra("cname", 0));
+            Log.i("fragment", "c RA name-: " + intent.getIntExtra("cname", 0));
 
             bundle.putString("date", intent.getStringExtra("date") );
             Log.i("fragment", "c RA date: " + intent.getIntExtra("date", 0));

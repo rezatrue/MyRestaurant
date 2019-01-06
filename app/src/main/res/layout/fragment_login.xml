@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -32,8 +32,6 @@
         android:id="@+id/etluserpassword"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Password"
@@ -59,12 +57,13 @@
         android:id="@+id/tvlregister"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="New User ? Register new"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"

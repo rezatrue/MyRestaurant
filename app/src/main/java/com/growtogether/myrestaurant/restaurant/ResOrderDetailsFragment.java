@@ -65,7 +65,7 @@ public class ResOrderDetailsFragment extends Fragment {
         int num = stat + 2; // as status start with -2 , -1 & so on
 
         tvCusName.setText(name);
-        tvPhone.setText(phn+"");
+        tvPhone.setText("0"+phn);
         tvDateTime.setText(date);
         tvStatus.setText(status[num]);
 

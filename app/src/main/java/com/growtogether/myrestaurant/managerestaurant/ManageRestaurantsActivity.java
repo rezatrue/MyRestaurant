@@ -133,10 +133,11 @@ public class ManageRestaurantsActivity extends AppCompatActivity
                 if(response.isSuccessful()){
                     User user = response.body();
                     if(user != null){
+
                         Log.i("fragment", " c sear namr: " + user.getUserName());
                         Log.i("fragment", "c sear phone: " + user.getUserPhone() );
                         intent.putExtra("cname", user.getUserName());
-                        intent.putExtra("cphone", user.getUserPhone());
+                        intent.putExtra("cphone", Integer.parseInt(user.getUserPhone()));
                         startActivity(intent);
                     }else {
                         Log.i("fragment", " result: " + null );
