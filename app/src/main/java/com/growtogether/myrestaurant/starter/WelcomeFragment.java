@@ -60,7 +60,6 @@ public class WelcomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.optionRecyclerView);
         optionAdapter = new OptionAdapter(activity,options);
         GridLayoutManager glm = new GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false);
-
         recyclerView.setLayoutManager(glm);
         recyclerView.setAdapter(optionAdapter);
 

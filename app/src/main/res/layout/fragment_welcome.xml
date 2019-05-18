@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".starter.WelcomeFragment"
+    android:background="@drawable/background"
     >
+
+
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -23,7 +26,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/optionRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
 
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>
