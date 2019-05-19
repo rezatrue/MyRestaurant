@@ -7,4 +7,10 @@
     android:id="@+id/res_order_fragment_container"
     tools:context=".ordermanagement.PostOrderActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/food1"
+        android:scaleType="centerCrop"/>
+
 </android.support.constraint.ConstraintLayout>

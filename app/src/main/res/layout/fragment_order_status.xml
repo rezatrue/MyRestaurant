@@ -8,6 +8,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"/>
+
     <ListView
         android:id="@+id/orderLV"
         android:layout_width="match_parent"
@@ -17,6 +23,7 @@
         android:id="@+id/msgTV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/trans_while_rectangle"
         android:text="NO ORDER FOUND"
         android:gravity="center"
         android:visibility="gone"/>

@@ -18,6 +18,7 @@
         android:id="@+id/msgTV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/trans_while_rectangle"
         android:text="NO ITEM FOUND"
         android:gravity="center"
         android:visibility="gone"

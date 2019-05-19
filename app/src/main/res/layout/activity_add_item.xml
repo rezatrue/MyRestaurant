@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".restaurant.AddItemActivity">
+    android:orientation="vertical"
+    tools:context=".restaurant.AddItemActivity" >
 
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/food"
+        android:scaleType="centerCrop"/>
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="55dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:background="@drawable/trans_while_rectangle">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent">
+
 
         <EditText
             android:id="@+id/et_item_price"
@@ -131,5 +148,10 @@
 
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+
+   </ScrollView>
+
+</RelativeLayout>
+
+
 
