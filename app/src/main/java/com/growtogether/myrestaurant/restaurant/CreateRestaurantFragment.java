@@ -4,8 +4,10 @@ package com.growtogether.myrestaurant.restaurant;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -17,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +75,7 @@ public class CreateRestaurantFragment extends Fragment {
 
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
-
+    static final int RESULT_LOAD_IMAGE = 2;
 
     OnRestaurantCreateListener onRestaurantCreateListener;
 
@@ -120,14 +123,10 @@ public class CreateRestaurantFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "image clicked ");
-                dispatchTakePictureIntent();
-
-//                Bitmap myBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-//                imageIV.setImageBitmap(myBitmap);
-//                Log.i(TAG, "image :-> " + myBitmap.toString());
-
+                showPictureDialog();
             }
         });
+
 
         longitudeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -155,6 +154,28 @@ public class CreateRestaurantFragment extends Fragment {
         return view;
     }
 
+    private void showPictureDialog(){
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(activity);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                dispatchSelectPictureIntent();
+                                break;
+                            case 1:
+                                dispatchTakePictureIntent();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -287,6 +308,7 @@ public class CreateRestaurantFragment extends Fragment {
 
     }
 
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -309,15 +331,43 @@ public class CreateRestaurantFragment extends Fragment {
         }
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private void dispatchSelectPictureIntent(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+        if (resultCode == activity.RESULT_CANCELED) {
+            return;
+        }
+
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             galleryAddPic();
             setPic();
         }
+        else if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = activity.getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            mCurrentPhotoPath = cursor.getString(columnIndex);
+            cursor.close();
+
+            imageIV.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
+        }
     }
+
+
    private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
