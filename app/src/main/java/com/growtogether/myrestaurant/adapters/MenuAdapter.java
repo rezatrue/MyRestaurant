@@ -4,6 +4,7 @@ package com.growtogether.myrestaurant.adapters;
  */
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.growtogether.myrestaurant.utils.ApiClient;
 import com.growtogether.myrestaurant.pojo.MenuResponse.Item;
@@ -39,8 +41,8 @@ public class MenuAdapter extends ArrayAdapter<Item>{
 
     public interface OnAdapterItemListener{
         public void addItemToOrderList(Item item);
-        public void addItemCountOnList(Item item);
-        public void decreaseItemCountOnList(Item item);
+        public int addItemCountOnList(Item item);
+        public int decreaseItemCountOnList(Item item);
     }
 
 
@@ -90,13 +92,16 @@ public class MenuAdapter extends ArrayAdapter<Item>{
             @Override
             public void onClick(View view) {
                 boolean status = isItNewItem(items.get(position).getSerialno());
-                if(status)
+                if(status) {
                     onAdapterItemListener.addItemToOrderList(items.get(position));
+                    showToast(1);
+                }
                 else{
-                    onAdapterItemListener.addItemCountOnList(items.get(position));
+                    int num = onAdapterItemListener.addItemCountOnList(items.get(position));
+                    showToast(num);
                 }
                 //Log.i("fragment", " <- Item selected  . -> " + viewHolder.itemName.getText());
-                Log.i("fragment", " <- Item selected  . -> " + items.get(position).getName());
+                Log.i("fragment", " <- Item selected  . -> " + items.get(position).getName() + " - "  + items.get(position).getSerialno());
 
             }
         });
@@ -105,13 +110,30 @@ public class MenuAdapter extends ArrayAdapter<Item>{
             @Override
             public void onClick(View view) {
                 boolean status = isItNewItem(items.get(position).getSerialno());
-                if(!status)
-                    onAdapterItemListener.decreaseItemCountOnList(items.get(position));
-
+                if(!status){
+                    int num = onAdapterItemListener.decreaseItemCountOnList(items.get(position));
+                    showToast(num);
+                }
             }
         });
 
         return convertView;
+    }
+
+    // making shirt toast
+    private void showToast(int number){
+        final Toast toast = Toast.makeText(context, String.valueOf(number), Toast.LENGTH_SHORT);
+        toast.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toast.cancel();
+            }
+        }, 500);
+
+
     }
 
     private boolean isItNewItem(int serial){

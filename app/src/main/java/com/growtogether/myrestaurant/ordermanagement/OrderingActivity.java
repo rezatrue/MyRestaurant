@@ -94,26 +94,36 @@ public class OrderingActivity extends AppCompatActivity implements MenuAdapter.O
     }
 
     @Override
-    public void addItemCountOnList(MenuResponse.Item item) {
+    public int addItemCountOnList(MenuResponse.Item item) {
         int num = item.getSerialno();
+        Log.i("fragment", " <- Item -> " + num);
         for(int i = 0; i < selectedItems.size(); i++){
-            if(selectedItems.get(i).getItemSerialNo() == num)
-                selectedItems.get(i).setItemQuantity(selectedItems.get(i).getItemQuantity()+1);
+            if(selectedItems.get(i).getItemSerialNo() == num) {
+                selectedItems.get(i).setItemQuantity(selectedItems.get(i).getItemQuantity() + 1);
+                return selectedItems.get(i).getItemQuantity();
+            }
         }
+        return 0;
     }
 
     @Override
-    public void decreaseItemCountOnList(MenuResponse.Item item) {
+    public int decreaseItemCountOnList(MenuResponse.Item item) {
         int num = item.getSerialno();
+        Log.i("fragment", " <- Item -> " + num);
         for(int i = 0; i < selectedItems.size(); i++){
             if(selectedItems.get(i).getItemSerialNo() == num) {
                 int count = selectedItems.get(i).getItemQuantity();
-                if (count == 1)
+                if (count == 1){
                     selectedItems.remove(i);
-                else if (count > 1)
+                    return 0;
+                }
+                else if (count > 1){
                     selectedItems.get(i).setItemQuantity(count - 1);
+                    return selectedItems.get(i).getItemQuantity();
+                }
             }
         }
+        return 0;
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
