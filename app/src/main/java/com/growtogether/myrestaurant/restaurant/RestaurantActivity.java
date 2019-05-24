@@ -79,9 +79,31 @@ public class RestaurantActivity extends AppCompatActivity
     }
 
     @Override
-    public void switchToEditRestaurant() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.restaurant_fragment_container, new CreateRestaurantFragment())
+    public void afterDeleteRestaurant() {
+        switchToRestaurantList();
+    }
+
+    @Override
+    public void switchToEditRestaurant(RestaurantListResponse.Restaurant restaurant) {
+        Bundle bundle = new Bundle();
+
+        bundle.putInt("serialno", restaurant.getSerialno());
+        bundle.putString("name", restaurant.getName() );
+        bundle.putString("imageurl", restaurant.getImageurl() );
+        bundle.putString("type", restaurant.getType() );
+        bundle.putString("address", restaurant.getAddress() );
+        bundle.putString("phone", restaurant.getPhone() );
+        bundle.putDouble("latitude", restaurant.getLatitude() );
+        bundle.putDouble("longitude", restaurant.getLongitude() );
+        bundle.putInt("userid", restaurant.getUserid());
+        bundle.putString("created", restaurant.getCreated() );
+
+        CreateRestaurantFragment createRestaurantFragment = new CreateRestaurantFragment();
+        createRestaurantFragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.restaurant_fragment_container, createRestaurantFragment)
                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
     }
 
     @Override

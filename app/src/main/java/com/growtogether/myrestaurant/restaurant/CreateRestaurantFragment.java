@@ -4,16 +4,19 @@ package com.growtogether.myrestaurant.restaurant;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -41,8 +44,11 @@ import com.growtogether.myrestaurant.utils.ImageProcessor;
 import com.growtogether.myrestaurant.R;
 import com.growtogether.myrestaurant.pojo.Restaurant;
 import com.growtogether.myrestaurant.pojo.RestaurantResponse;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,8 +110,7 @@ public class CreateRestaurantFragment extends Fragment {
         longitudeET = view.findViewById(R.id.et_res_longitude);
         latitudeET = view.findViewById(R.id.et_res_latitude);
         btn = view.findViewById(R.id.btn_res_register);
-        if (userEdit)
-            btn.setText("Edit");
+
 
         spinner = view.findViewById(R.id.spinner_type);
 
@@ -115,7 +120,7 @@ public class CreateRestaurantFragment extends Fragment {
             public void onClick(View view) {
                 Log.i(TAG, "button clicked ");
                 if (!userEdit) createRestaurant();
-                else ; //do something;
+                else editRestaurant();
             }
         });
 
@@ -151,15 +156,47 @@ public class CreateRestaurantFragment extends Fragment {
         });
 
         Log.i(TAG, "Lat :-> " + latitude  + " Lng:-> "+ longitude);
+
+        Bundle bundle = this.getArguments();
+
+        if (null != bundle) userEdit = true;
+        // load data
+        if (userEdit){
+            btn.setText("Edit");
+
+            String name = bundle.getString("name");
+            nameET.setText(name);
+
+            type = bundle.getString("type");
+
+            String imageurl = ApiClient.BASE_URL + bundle.getString("imageurl");
+            Log.i("fragment", "imageurl :" + imageurl);
+            Picasso.get().load(imageurl).into(picassoImageTarget());
+
+            String address = bundle.getString("address");
+            addressET.setText(address);
+            String phone= bundle.getString("phone");
+            phoneET.setText(phone);
+            double latitude = bundle.getDouble("latitude");
+            longitudeET.setText(String.valueOf(latitude));
+            double longitude = bundle.getDouble("longitude");
+            latitudeET.setText(String.valueOf(longitude));
+
+            int serialno = bundle.getInt("serialno");
+            int userId = bundle.getInt("userid");
+            String created = bundle.getString("created");
+        }
+
         return view;
     }
+
 
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(activity);
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
-                "Select photo from gallery",
-                "Capture photo from camera" };
+                "Open Gallery",
+                "Open Camera" };
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -191,16 +228,10 @@ public class CreateRestaurantFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 type = adapterView.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
-
-
-
     }
 
 
@@ -254,7 +285,9 @@ public class CreateRestaurantFragment extends Fragment {
 
                     // attaching data adapter to spinner
                     spinner.setAdapter(dataAdapter);
-
+                    // when editing then spinner item need to be selected
+                    if(userEdit)
+                        if(type.length() > 1) spinner.setSelection(types.indexOf(type));
 
                 }
             }
@@ -267,6 +300,45 @@ public class CreateRestaurantFragment extends Fragment {
 
     }
 
+    // edit restaurant info
+    private void editRestaurant() {
+        String name = nameET.getText().toString();
+        String address = addressET.getText().toString();
+        String phone = phoneET.getText().toString();
+        String longitude = longitudeET.getText().toString();
+        String latitude = latitudeET.getText().toString();
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setRestaurantName(name);
+        restaurant.setRestaurantAddress(address);
+        restaurant.setRestaurantType(type);
+        restaurant.setRestaurantPhone(Integer.parseInt(phone));
+        restaurant.setRestaurantLatitude(Double.parseDouble(longitude));
+        restaurant.setRestaurantLongitude(Double.parseDouble(latitude));
+        restaurant.setUserSerialNo(RestaurantActivity.userid);
+
+        ImageProcessor imageProcessor = new ImageProcessor();
+        restaurant.setRestaurantImage(imageProcessor.compressImage(mCurrentPhotoPath));
+
+        Call<RestaurantResponse> restaurantResponse = apiInterface.getEditRestaurantResponse(restaurant);
+
+        restaurantResponse.enqueue(new Callback<RestaurantResponse>() {
+            @Override
+            public void onResponse(Call<RestaurantResponse> call, Response<RestaurantResponse> response) {
+                Log.i(TAG, "response ->: "+ response.code());
+                if(response.isSuccessful()) {
+                    nameET.setText(""); addressET.setText(""); phoneET.setText(""); longitudeET.setText(""); latitudeET.setText("");
+                    onRestaurantCreateListener.switchToRestaurantList();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestaurantResponse> call, Throwable t) {
+                Log.i(TAG, "failed : "+t.getMessage());
+            }
+        });
+
+    }
 
     private void createRestaurant() {
 
@@ -416,5 +488,49 @@ public class CreateRestaurantFragment extends Fragment {
         imageIV.setImageBitmap(bitmap);
     }
 
+    private Target picassoImageTarget() {
+        Log.d("picassoImageTarget", " picassoImageTarget");
 
+        return new Target() {
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                final Handler handler=new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileOutputStream fos = null;
+                        try {
+                            File myImageFile = createImageFile();
+                            fos = new FileOutputStream(myImageFile);
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        galleryAddPic();
+                        setPic();
+                        Log.i("image", "image saved to >>>" + mCurrentPhotoPath);
+                   }
+                });
+
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                if (placeHolderDrawable != null) {}
+            }
+        };
+
+    }
 }

@@ -3,10 +3,12 @@ package com.growtogether.myrestaurant.restaurant;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +49,9 @@ public class MyRestaurantListFragment extends Fragment{
     OnRestaurantListItemListener onRestaurantListItemListener;
 
     public interface OnRestaurantListItemListener{
-        public void switchToEditRestaurant();
+        public void switchToEditRestaurant(Restaurant restaurant);
         public void switchToManageRestaurant(Restaurant restaurant);
+        public void afterDeleteRestaurant();
     }
 
     public MyRestaurantListFragment() {
@@ -124,6 +127,13 @@ public class MyRestaurantListFragment extends Fragment{
             }
         });
 
+        restaurantListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                showDialog(i);
+                return true;
+            }
+        });
 
     }
 
@@ -134,4 +144,34 @@ public class MyRestaurantListFragment extends Fragment{
         this.activity = (Activity) context;
         onRestaurantListItemListener = (OnRestaurantListItemListener) activity;
     }
+
+    private void showDialog(int resId){
+        final int id = resId;
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(activity);
+        //pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Edit Restaurant",
+                "Delete" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                Log.i("fragment", "Edit : "+ id + "size : " + restaurants.size());
+                                RestaurantListResponse.Restaurant restaurant = restaurants.get(id);
+                                onRestaurantListItemListener.switchToEditRestaurant(restaurant);
+                                break;
+                            case 1:
+                                Log.i("fragment", "Delete : ");
+                                // delete the restaurant with the id id
+
+                                onRestaurantListItemListener.afterDeleteRestaurant();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
 }
